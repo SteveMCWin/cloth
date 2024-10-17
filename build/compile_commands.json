@@ -1,0 +1,27 @@
+[
+{
+  "directory": "/home/stevica/openGL_projects/cloth/build",
+  "command": "/usr/bin/c++  -I/urs/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/local/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/include/libpng16  -o CMakeFiles/my_opengl_project.dir/main.cpp.o -c /home/stevica/openGL_projects/cloth/main.cpp",
+  "file": "/home/stevica/openGL_projects/cloth/main.cpp"
+},
+{
+  "directory": "/home/stevica/openGL_projects/cloth/build",
+  "command": "/usr/bin/cc  -I/urs/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/local/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/include/libpng16  -o CMakeFiles/my_opengl_project.dir/glad.c.o -c /home/stevica/openGL_projects/cloth/glad.c",
+  "file": "/home/stevica/openGL_projects/cloth/glad.c"
+},
+{
+  "directory": "/home/stevica/openGL_projects/cloth/build",
+  "command": "/usr/bin/c++  -I/urs/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/local/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/include/libpng16  -o CMakeFiles/my_opengl_project.dir/cloth_vertex.cpp.o -c /home/stevica/openGL_projects/cloth/cloth_vertex.cpp",
+  "file": "/home/stevica/openGL_projects/cloth/cloth_vertex.cpp"
+},
+{
+  "directory": "/home/stevica/openGL_projects/cloth/build",
+  "command": "/usr/bin/c++  -I/urs/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/local/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/include/libpng16  -o CMakeFiles/my_opengl_project.dir/cloth_renderer.cpp.o -c /home/stevica/openGL_projects/cloth/cloth_renderer.cpp",
+  "file": "/home/stevica/openGL_projects/cloth/cloth_renderer.cpp"
+},
+{
+  "directory": "/home/stevica/openGL_projects/cloth/build",
+  "command": "/usr/bin/c++  -I/urs/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/local/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/include/libpng16  -o CMakeFiles/my_opengl_project.dir/cloth_handler.cpp.o -c /home/stevica/openGL_projects/cloth/cloth_handler.cpp",
+  "file": "/home/stevica/openGL_projects/cloth/cloth_handler.cpp"
+}
+]
