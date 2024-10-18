@@ -12,6 +12,7 @@ class ClothHandler {
 
 public:
     ClothVertex cloth_vertices[10][10];
+    glm::vec3 cloth_position = glm::vec3(0.0f, 0.0f, -2.0f);
 
     ClothHandler();
     ClothHandler(glm::vec3 positions[10][10], float masses[10][10]);

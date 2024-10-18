@@ -92,19 +92,23 @@ int main(int, char**){
 
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
-            cloth_vertex_positions[i][j] = glm::vec3(20.0f * (j-5), 20.0f * (i-5), -10.0f);
+            cloth_vertex_positions[i][j] = glm::vec3(0.2f * (j-5), 0.2f * (i-5), -1.0f);
             masses[i][j] = 1.0f;
         }
     }
 
     ClothHandler handler = ClothHandler(cloth_vertex_positions, masses);
+    ClothRenderer renderer;
 
     // for(int i = 0; i < 10; i++){
     //     for(int j = 0; j < 10; j++){
     //         printVec3(handler.cloth_vertices[i][j].position);
+    //         std::cout << "{}"
     //     }
     //     std::cout << std::endl << std::endl;
     // }
+
+    // renderer.RenderVertices(handler, cloth_vertex_shader);
 
     while(!glfwWindowShouldClose(window)){
 
@@ -117,9 +121,11 @@ int main(int, char**){
         glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        test_shader.use();
-        glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        // test_shader.use();
+        // glBindVertexArray(VAO);
+        // glDrawArrays(GL_TRIANGLES, 0, 3);
+
+        renderer.RenderVertices(handler, cloth_vertex_shader);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

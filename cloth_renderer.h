@@ -16,10 +16,10 @@ public:
 
 private:
 
-    float cloth_vert_idk[300];
+    void fillVertBuffer(ClothHandler& cloth);
 
-    unsigned int triangleVBO;
-    unsigned int triangleVAO;
+    unsigned int vertexVBO;
+    unsigned int vertexVAO;
 };
 
 #endif // !CLOTH_RENDERER_H
