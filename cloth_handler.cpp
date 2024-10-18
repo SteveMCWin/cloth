@@ -1,6 +1,7 @@
 #include "cloth_handler.h"
+#include <glm/vec3.hpp>
 
-ClothHander::ClothHander(){
+ClothHandler::ClothHandler(){
 
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
@@ -11,8 +12,7 @@ ClothHander::ClothHander(){
 
 }
 
-ClothHander::ClothHander(glm::vec3 **positions, float **masses){
-
+ClothHandler::ClothHandler(glm::vec3 positions[10][10], float masses[10][10]){
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             // ClothVertex v = ClothVertex(positions[i][j], masses[i][j]);

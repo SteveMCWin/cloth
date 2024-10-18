@@ -12,7 +12,9 @@ public:
     ClothVertex(glm::vec3 pos, float m);
 
     glm::vec3 position;
+    // float position[3];
     glm::vec3 previous_position;
+    // float previous_position[3];
     glm::vec3 force_applied;
     // glm::vec3 velocity;
     float mass;

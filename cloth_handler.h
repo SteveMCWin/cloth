@@ -8,13 +8,13 @@
 #include "cloth_vertex.h"
 //#include "cloth_spring.h"
 
-class ClothHander {
+class ClothHandler {
 
 public:
     ClothVertex cloth_vertices[10][10];
 
-    ClothHander();
-    ClothHander(glm::vec3 **positions, float **masses);
+    ClothHandler();
+    ClothHandler(glm::vec3 positions[10][10], float masses[10][10]);
     void UpdateVertices();
     //void UpdateSprings();
 

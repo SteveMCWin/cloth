@@ -4,6 +4,7 @@
 #include <glm/detail/type_vec.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <iostream>
 
 #include "shader.h"
 #include "cloth_vertex.h"
@@ -14,6 +15,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void processInput(GLFWwindow* window);
+void printVec3(glm::vec3 vec);
 
 const unsigned int SCR_WIDTH    = 1600;
 const unsigned int SCR_HEIGHT   =  900;
@@ -82,6 +84,27 @@ int main(int, char**){
 
     Shader test_shader = Shader("/home/stevica/openGL_projects/cloth/shaders/v_test.glsl",
                                 "/home/stevica/openGL_projects/cloth/shaders/f_test.glsl");
+    Shader cloth_vertex_shader = Shader("/home/stevica/openGL_projects/cloth/shaders/v_cloth_vertex.glsl",
+                                        "/home/stevica/openGL_projects/cloth/shaders/f_cloth_vertex.glsl");
+
+    glm::vec3 cloth_vertex_positions[10][10];
+    float masses[10][10];
+
+    for(int i = 0; i < 10; i++){
+        for(int j = 0; j < 10; j++){
+            cloth_vertex_positions[i][j] = glm::vec3(20.0f * (j-5), 20.0f * (i-5), -10.0f);
+            masses[i][j] = 1.0f;
+        }
+    }
+
+    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses);
+
+    // for(int i = 0; i < 10; i++){
+    //     for(int j = 0; j < 10; j++){
+    //         printVec3(handler.cloth_vertices[i][j].position);
+    //     }
+    //     std::cout << std::endl << std::endl;
+    // }
 
     while(!glfwWindowShouldClose(window)){
 
@@ -119,5 +142,7 @@ void processInput(GLFWwindow* window){
     }
 }
 
-
+void printVec3(glm::vec3 vec){
+    std::cout << "{" << vec.x << ", " << vec.y << ", " << vec.z << "}" << std::endl;
+}
 
