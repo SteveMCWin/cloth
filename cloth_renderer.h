@@ -6,7 +6,6 @@
 #include "shader.h"
 
 class ClothRenderer {
-
 public:
      ClothRenderer();
     ~ClothRenderer();

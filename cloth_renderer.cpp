@@ -45,32 +45,60 @@ void ClothRenderer::RenderVertices(ClothHandler& cloth, Shader shader){
 
     shader.setMat4("view", view);
     shader.setMat4("projection", projection);
+    // for(int i = 0; i < 10; i++){
+    //     for(int j = 0; j < 10; j++){
+    //         glm::mat4 model = glm::mat4(1.0f);
+    //         // glm::vec3 vert_pos = glm::vec3(cloth.cloth_vertices[i][j].position[0], cloth.cloth_vertices[i][j].position[1], cloth.cloth_vertices[i][j].position[2]);
+    //         // model = glm::translate(model, cloth.cloth_position);
+    //         shader.setMat4("model", model);
+    //         glDrawArrays(GL_POINTS, 0, 100);
+    //     }
+    // }
+    glm::mat4 model = glm::mat4(1.0f);
+    // model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
+    shader.setMat4("model", model);
 
     glBindVertexArray(this->vertexVAO);
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 10; j++){
-            glm::mat4 model = glm::mat4(1.0f);
-            // glm::vec3 vert_pos = glm::vec3(cloth.cloth_vertices[i][j].position[0], cloth.cloth_vertices[i][j].position[1], cloth.cloth_vertices[i][j].position[2]);
-            // model = glm::translate(model, cloth.cloth_position);
-            shader.setMat4("model", model);
-            glDrawArrays(GL_POINTS, 0, 100);
-        }
-    }
+    glDrawArrays(GL_POINTS, 0, 100);
+    glBindVertexArray(0);
 
 }
 
 
 void ClothRenderer::fillVertBuffer(ClothHandler& cloth){
+    glBindVertexArray(this->vertexVAO);
     glBindBuffer(GL_ARRAY_BUFFER, this->vertexVBO);
+    float vertices_positions[300];
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
             float vertex[3] = {cloth.cloth_vertices[i][j].position[0], cloth.cloth_vertices[i][j].position[1], cloth.cloth_vertices[i][j].position[2]};
-            std::cout << "{" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << "}\n";
-            glBufferSubData(GL_ARRAY_BUFFER, (10*i+j)*sizeof(vertex), sizeof(vertex),
-                            vertex);
+            vertices_positions[30*i+3*j  ] = vertex[0];
+            vertices_positions[30*i+3*j+1] = vertex[1];
+            vertices_positions[30*i+3*j+2] = vertex[2];
+            // std::cout << 30*i+3*j << std::endl << 30*i+3*j+1 << std::endl << 30*i+3*j+2 << std::endl;
+            // std::cout << "{" << vertex[0] << ", " << vertex[1] << ", " << vertex[2] << "}\n";
+            // glBufferSubData(GL_ARRAY_BUFFER, (10*i+j)*sizeof(vertex), sizeof(vertex), vertex);
         }
-        std::cout << std::endl << std::endl;
+        // std::cout << std::endl << std::endl;
     }
+
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices_positions), vertices_positions);
+    // std::cout << "Before getting data: " << std::endl << std::endl;
+    //
+    // for(int i = 0; i < 300; i++){
+    //     if(i%3 == 0) std::cout << std::endl;
+    //     std::cout << vertices_positions[i] << "\t";
+    // }
+    // 
+    // std::cout << "After getting data: " << std::endl << std::endl;
+    //
+    // glGetBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices_positions), vertices_positions);
+    // for(int i = 0; i < 300; i++){
+    //     if(i%3 == 0) std::cout << std::endl;
+    //     std::cout << vertices_positions[i] << "\t";
+    // }
+    // std::cout << std::endl;
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 
