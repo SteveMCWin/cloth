@@ -35,30 +35,30 @@ void ClothRenderer::RenderVertices(ClothHandler& cloth, Shader shader){
 
     fillVertBuffer(cloth);
 
+    glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
     glm::mat4 projection = glm::mat4(1.0f);
 
-    shader.use();
 
     view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));  // the view matrix will have to be initialized in main if I want camera movement 
     projection = glm::perspective(glm::radians(45.0f), 16.0f/9.0f, 0.1f, 100.0f);   // will have to change this to use the global class at least to get the aspect ratio
 
+    shader.use();
     shader.setMat4("view", view);
     shader.setMat4("projection", projection);
-    // for(int i = 0; i < 10; i++){
-    //     for(int j = 0; j < 10; j++){
-    //         glm::mat4 model = glm::mat4(1.0f);
-    //         // glm::vec3 vert_pos = glm::vec3(cloth.cloth_vertices[i][j].position[0], cloth.cloth_vertices[i][j].position[1], cloth.cloth_vertices[i][j].position[2]);
-    //         // model = glm::translate(model, cloth.cloth_position);
-    //         shader.setMat4("model", model);
-    //         glDrawArrays(GL_POINTS, 0, 100);
-    //     }
-    // }
-    glm::mat4 model = glm::mat4(1.0f);
-    // model = glm::translate(model, glm::vec3(1.0f, 0.0f, 0.0f));
     shader.setMat4("model", model);
 
     glBindVertexArray(this->vertexVAO);
+
+    // float vertices_positions[300];
+    // glBindBuffer(GL_ARRAY_BUFFER, this->vertexVBO);
+    // glGetBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices_positions), vertices_positions);
+    // for(int i = 0; i < 300; i++){
+    //     if(i%3 == 0) std::cout << std::endl;
+    //     std::cout << vertices_positions[i] << "\t";
+    // }
+    // std::cout << std::endl;
+
     glDrawArrays(GL_POINTS, 0, 100);
     glBindVertexArray(0);
 
