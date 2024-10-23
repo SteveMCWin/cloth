@@ -8,7 +8,7 @@
 #include "cloth_vertex.h"
 //#include "cloth_spring.h"
 
-class ClothHandler {
+class ClothHandler {    // used to store and work with cloth vertices
 
 public:
     ClothVertex cloth_vertices[10][10];

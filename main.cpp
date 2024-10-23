@@ -62,36 +62,13 @@ int main(int, char**){
     // glEnable(GL_MULTISAMPLE);
 
 
-    // float vertices[] = {
-    //     -0.5f, -0.5f, 0.0f, // left  
-    //      0.5f, -0.5f, 0.0f, // right 
-    //      0.0f,  0.5f, 0.0f  // top   
-    // }; 
-
-    // unsigned int VBO, VAO;
-    // glGenVertexArrays(1, &VAO);
-    // glGenBuffers(1, &VBO);
-    // glBindVertexArray(VAO);
-    //
-    // glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    // glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    //
-    // glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    // glEnableVertexAttribArray(0);
-    //
-    // glBindBuffer(GL_ARRAY_BUFFER, 0); 
-    //
-    // glBindVertexArray(0); 
-
-    // Shader test_shader = Shader("/home/stevica/openGL_projects/cloth/shaders/v_test.glsl",
-    //                             "/home/stevica/openGL_projects/cloth/shaders/f_test.glsl");
     Shader cloth_vertex_shader = Shader("/home/stevica/openGL_projects/cloth/shaders/v_cloth_vertex.glsl",
                                         "/home/stevica/openGL_projects/cloth/shaders/f_cloth_vertex.glsl");
 
     glm::vec3 cloth_vertex_positions[10][10];
     float masses[10][10];
 
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < 10; i++){    // Generating position data for each cloth vertex
         for(int j = 0; j < 10; j++){
             cloth_vertex_positions[i][j] = glm::vec3(0.2f * (j-5), 0.2f * (i-5), -1.0f);
             masses[i][j] = 1.0f;
@@ -100,17 +77,6 @@ int main(int, char**){
 
     ClothHandler handler = ClothHandler(cloth_vertex_positions, masses);
     ClothRenderer renderer;
-
-    // for(int i = 0; i < 10; i++){
-    //     for(int j = 0; j < 10; j++){
-    //         // printVec3(handler.cloth_vertices[i][j].position);
-    //         std::cout << "{" << handler.cloth_vertices[i][j].position[0] << ", " <<  handler.cloth_vertices[i][j].position[1] << ", "
-    //                   <<  handler.cloth_vertices[i][j].position[2] << "}" << std::endl;
-    //     }
-    //     std::cout << std::endl << std::endl;
-    // }
-
-    // renderer.RenderVertices(handler, cloth_vertex_shader);
 
     while(!glfwWindowShouldClose(window)){
 
@@ -123,15 +89,10 @@ int main(int, char**){
         glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // test_shader.use();
-        // glBindVertexArray(VAO);
-        // glDrawArrays(GL_TRIANGLES, 0, 3);
-
         renderer.RenderVertices(handler, cloth_vertex_shader);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
-
     }
 
     glfwTerminate();

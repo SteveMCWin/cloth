@@ -8,15 +8,12 @@
 class ClothVertex {
 
 public:
-    ClothVertex();
+    ClothVertex();  // the class is supposed to represent a signle vertex
     ClothVertex(glm::vec3 pos, float m);
 
-    // glm::vec3 position;
     float position[3];
-    // glm::vec3 previous_position;
     float previous_position[3];
     glm::vec3 force_applied;
-    // glm::vec3 velocity;
     float mass;
 
     // so the idea is that the cloth handler will fist calculate the firce from the springs
