@@ -366,4 +366,5 @@ CMakeFiles/my_opengl_project.dir/main.cpp.o: \
  /usr/include/c++/11/bits/sstream.tcc \
  /home/stevica/openGL_projects/cloth/cloth_vertex.h \
  /home/stevica/openGL_projects/cloth/cloth_renderer.h \
- /home/stevica/openGL_projects/cloth/cloth_handler.h
+ /home/stevica/openGL_projects/cloth/cloth_handler.h \
+ /home/stevica/openGL_projects/cloth/global.h

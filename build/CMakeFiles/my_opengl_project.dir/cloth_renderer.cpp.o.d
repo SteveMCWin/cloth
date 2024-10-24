@@ -363,6 +363,7 @@ CMakeFiles/my_opengl_project.dir/cloth_renderer.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
  /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/sstream \
  /usr/include/c++/11/bits/sstream.tcc /usr/include/c++/11/iostream \
+ /home/stevica/openGL_projects/cloth/global.h \
  /usr/local/include/glm/gtc/matrix_transform.hpp \
  /usr/local/include/glm/gtc/constants.hpp \
  /usr/local/include/glm/gtc/constants.inl \

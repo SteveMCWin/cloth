@@ -4,6 +4,7 @@
 #include "cloth_handler.h"
 #include "cloth_vertex.h"
 #include "shader.h"
+#include "global.h"
 
 class ClothRenderer {
 public:
@@ -16,9 +17,13 @@ public:
 private:
 
     void fillVertBuffer(ClothHandler& cloth);   // since cloth vertex positions change every frame, the vbo should get updated as soon as they do
+    void setUpRendering(ClothHandler& cloth, Shader& shader);
 
     unsigned int vertexVBO;
     unsigned int vertexVAO;
+    unsigned int vertexEBO[9];
+
+    unsigned int rowIndices[9][20];
 };
 
 #endif // !CLOTH_RENDERER_H

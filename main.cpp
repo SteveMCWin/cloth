@@ -89,7 +89,7 @@ int main(int, char**){
         glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        renderer.RenderVertices(handler, cloth_vertex_shader);
+        renderer.RenderCloth(handler, cloth_vertex_shader);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

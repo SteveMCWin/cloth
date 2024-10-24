@@ -707,6 +707,7 @@ CMakeFiles/my_opengl_project.dir/cloth_renderer.cpp.o: ../cloth_renderer.cpp \
   /usr/include/c++/11/sstream \
   /usr/include/c++/11/bits/sstream.tcc \
   /usr/include/c++/11/iostream \
+  ../global.h \
   /usr/local/include/glm/gtc/matrix_transform.hpp \
   /usr/local/include/glm/gtc/constants.hpp \
   /usr/local/include/glm/gtc/constants.inl \
@@ -1489,7 +1490,8 @@ CMakeFiles/my_opengl_project.dir/main.cpp.o: ../main.cpp \
   /usr/include/c++/11/bits/sstream.tcc \
   ../cloth_vertex.h \
   ../cloth_renderer.h \
-  ../cloth_handler.h
+  ../cloth_handler.h \
+  ../global.h
 
 
 ../main.cpp:
@@ -1501,6 +1503,8 @@ CMakeFiles/my_opengl_project.dir/main.cpp.o: ../main.cpp \
 /usr/local/include/glm/gtc/constants.hpp:
 
 /usr/local/include/glm/gtc/matrix_transform.hpp:
+
+../global.h:
 
 /usr/include/c++/11/bits/fstream.tcc:
 
