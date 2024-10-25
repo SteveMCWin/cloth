@@ -8,6 +8,14 @@ ClothHandler::ClothHandler(){
             this->cloth_vertices[i][j] = ClothVertex();
         }
     }
+    // initialize horizontal springs
+    for(int i = 0; i < 90; i++){
+        
+    }
+    // initialize vertical springs
+    for(int i = 0; i < 90; i++){
+        
+    }
 
 }
 

@@ -91,7 +91,7 @@ void ClothRenderer::fillVertBuffer(ClothHandler& cloth){
 
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
-            float vertex[3] = {cloth.cloth_vertices[i][j].position[0], cloth.cloth_vertices[i][j].position[1], cloth.cloth_vertices[i][j].position[2]};
+            float vertex[3] = {cloth.cloth_vertices[i][j].position.x, cloth.cloth_vertices[i][j].position.y, cloth.cloth_vertices[i][j].position.z};
             vertices_positions[30*i+3*j  ] = vertex[0];
             vertices_positions[30*i+3*j+1] = vertex[1];
             vertices_positions[30*i+3*j+2] = vertex[2];

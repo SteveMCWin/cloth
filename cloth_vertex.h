@@ -11,8 +11,8 @@ public:
     ClothVertex();  // the class is supposed to represent a signle vertex
     ClothVertex(glm::vec3 pos, float m);
 
-    float position[3];
-    float previous_position[3];
+    glm::vec3 position;
+    glm::vec3 previous_position;
     glm::vec3 force_applied;
     float mass;
 
