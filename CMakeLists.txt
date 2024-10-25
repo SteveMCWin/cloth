@@ -18,8 +18,8 @@ add_executable(my_opengl_project
     glad.c
     cloth_vertex.cpp
     cloth_renderer.cpp
-    cloth_handler.cpp
-    spring.cpp)
+    spring.cpp
+    cloth_handler.cpp)
 
 include_directories(/urs/include/freetype2 -I/usr/local/include/freetype2 -I/usr/include/libpng16)
 

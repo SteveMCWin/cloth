@@ -275,4 +275,5 @@ CMakeFiles/my_opengl_project.dir/cloth_handler.cpp.o: \
  /usr/local/include/glm/detail/func_integer.inl \
  /usr/local/include/glm/detail/func_integer_simd.inl \
  /usr/local/include/glm/simd/integer.h \
- /home/stevica/openGL_projects/cloth/cloth_vertex.h
+ /home/stevica/openGL_projects/cloth/cloth_vertex.h \
+ /home/stevica/openGL_projects/cloth/spring.h

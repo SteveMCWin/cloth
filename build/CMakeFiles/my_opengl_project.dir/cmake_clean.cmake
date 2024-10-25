@@ -9,6 +9,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/my_opengl_project.dir/glad.c.o.d"
   "CMakeFiles/my_opengl_project.dir/main.cpp.o"
   "CMakeFiles/my_opengl_project.dir/main.cpp.o.d"
+  "CMakeFiles/my_opengl_project.dir/spring.cpp.o"
+  "CMakeFiles/my_opengl_project.dir/spring.cpp.o.d"
   "my_opengl_project"
   "my_opengl_project.pdb"
 )

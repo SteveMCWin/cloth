@@ -249,6 +249,30 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+spring.o: spring.cpp.o
+.PHONY : spring.o
+
+# target to build an object file
+spring.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/spring.cpp.o
+.PHONY : spring.cpp.o
+
+spring.i: spring.cpp.i
+.PHONY : spring.i
+
+# target to preprocess a source file
+spring.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/spring.cpp.i
+.PHONY : spring.cpp.i
+
+spring.s: spring.cpp.s
+.PHONY : spring.s
+
+# target to generate assembly for a file
+spring.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/spring.cpp.s
+.PHONY : spring.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -273,6 +297,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... spring.o"
+	@echo "... spring.i"
+	@echo "... spring.s"
 .PHONY : help
 
 

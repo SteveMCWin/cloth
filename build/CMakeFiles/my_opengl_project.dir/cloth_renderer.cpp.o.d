@@ -277,6 +277,7 @@ CMakeFiles/my_opengl_project.dir/cloth_renderer.cpp.o: \
  /usr/local/include/glm/detail/func_integer_simd.inl \
  /usr/local/include/glm/simd/integer.h \
  /home/stevica/openGL_projects/cloth/cloth_vertex.h \
+ /home/stevica/openGL_projects/cloth/spring.h \
  /home/stevica/openGL_projects/cloth/shader.h /usr/include/c++/11/string \
  /usr/include/c++/11/bits/stringfwd.h \
  /usr/include/c++/11/bits/memoryfwd.h \

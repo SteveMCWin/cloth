@@ -2,6 +2,11 @@
 #include "cloth_vertex.h"
 #include <glm/detail/func_geometric.hpp>
 
+Spring::Spring(){
+    this->stiffness = 50.0f;
+    this->rest_length = 0.2f;
+}
+
 Spring::Spring(float stiff, float rest_len, ClothVertex& v1, ClothVertex& v2){
     this->stiffness = stiff;
     this->rest_length = rest_len;
@@ -15,3 +20,7 @@ glm::vec3 Spring::calculateSpringForce(){
             (glm::length(this->end_vertices[1].position - this->end_vertices[0].position) - this->rest_length);
 }
 
+void Spring::ApplyForce(glm::vec3 force, float delta_t){
+    this->end_vertices[0].ApplyForce(-force, delta_t);
+    this->end_vertices[1].ApplyForce( force, delta_t);
+}

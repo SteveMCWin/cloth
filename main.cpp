@@ -64,6 +64,7 @@ int main(int, char**){
 
     Shader cloth_vertex_shader = Shader("/home/stevica/openGL_projects/cloth/shaders/v_cloth_vertex.glsl",
                                         "/home/stevica/openGL_projects/cloth/shaders/f_cloth_vertex.glsl");
+    // Shader cloth_shader        = Shader("/home/stevica/openGL_projects/")
 
     glm::vec3 cloth_vertex_positions[10][10];
     float masses[10][10];
@@ -75,7 +76,7 @@ int main(int, char**){
         }
     }
 
-    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses);
+    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, 50.0f, 0.1f);
     ClothRenderer renderer;
 
     while(!glfwWindowShouldClose(window)){
@@ -89,6 +90,7 @@ int main(int, char**){
         glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        handler.UpdateVertices(delta_time);
         renderer.RenderCloth(handler, cloth_vertex_shader);
 
         glfwSwapBuffers(window);

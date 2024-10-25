@@ -21,6 +21,11 @@
 },
 {
   "directory": "/home/stevica/openGL_projects/cloth/build",
+  "command": "/usr/bin/c++  -I/urs/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/local/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/include/libpng16  -o CMakeFiles/my_opengl_project.dir/spring.cpp.o -c /home/stevica/openGL_projects/cloth/spring.cpp",
+  "file": "/home/stevica/openGL_projects/cloth/spring.cpp"
+},
+{
+  "directory": "/home/stevica/openGL_projects/cloth/build",
   "command": "/usr/bin/c++  -I/urs/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/local/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/include/libpng16  -o CMakeFiles/my_opengl_project.dir/cloth_handler.cpp.o -c /home/stevica/openGL_projects/cloth/cloth_handler.cpp",
   "file": "/home/stevica/openGL_projects/cloth/cloth_handler.cpp"
 }
