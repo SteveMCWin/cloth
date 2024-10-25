@@ -20,7 +20,7 @@ glm::vec3 Spring::calculateSpringForce(){
             (glm::length(this->end_vertices[1].position - this->end_vertices[0].position) - this->rest_length);
 }
 
-void Spring::ApplyForce(glm::vec3 force, float delta_t){
-    this->end_vertices[0].ApplyForce(-force, delta_t);
-    this->end_vertices[1].ApplyForce( force, delta_t);
+void Spring::ApplyForce(glm::vec3 force, float delta_t){    // maybe the force application is not correct, perhaps try directly using calculateSpringForce here
+    this->end_vertices[0].ApplyForce(-force + this->end_vertices[0].mass * glm::vec3(0.0f, -9.81f, 0.0f), delta_t);
+    this->end_vertices[1].ApplyForce( force + this->end_vertices[1].mass * glm::vec3(0.0f, -9.81f, 0.0f), delta_t);
 }

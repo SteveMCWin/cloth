@@ -62,9 +62,10 @@ int main(int, char**){
     // glEnable(GL_MULTISAMPLE);
 
 
-    Shader cloth_vertex_shader = Shader("/home/stevica/openGL_projects/cloth/shaders/v_cloth_vertex.glsl",
-                                        "/home/stevica/openGL_projects/cloth/shaders/f_cloth_vertex.glsl");
-    // Shader cloth_shader        = Shader("/home/stevica/openGL_projects/")
+    Shader cloth_vertex_shader  = Shader("/home/stevica/openGL_projects/cloth/shaders/v_cloth_vertex.glsl",
+                                         "/home/stevica/openGL_projects/cloth/shaders/f_cloth_vertex.glsl");
+    Shader spring_shader        = Shader("/home/stevica/openGL_projects/cloth/shaders/v_spring.glsl",
+                                         "/home/stevica/openGL_projects/cloth/shaders/f_spring.glsl");
 
     glm::vec3 cloth_vertex_positions[10][10];
     float masses[10][10];
@@ -85,6 +86,8 @@ int main(int, char**){
         delta_time = current_frame - last_frame;
         last_frame = current_frame;
 
+        // std::cout << "dt^2: " << delta_time*delta_time << std::endl;
+
         processInput(window);
 
         glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
@@ -92,6 +95,16 @@ int main(int, char**){
 
         handler.UpdateVertices(delta_time);
         renderer.RenderCloth(handler, cloth_vertex_shader);
+        renderer.RenderSprings(handler, spring_shader);
+
+        // It looks like the vertices themselves are not being updated, make sure you didn't forget to put a reference somewhere
+
+        // for(int i = 0; i < 10; i++){
+        //     for(int j = 0; j < 10; j++){
+        //         printVec3(handler.cloth_vertices[i][j].position);
+        //     }
+        // }
+        // std::cout << std::endl << std::endl;
 
         glfwSwapBuffers(window);
         glfwPollEvents();

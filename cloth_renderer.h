@@ -11,8 +11,9 @@ public:
      ClothRenderer();   // handles all cloth rendering related stuff, the constructor just sets up the vbo and vao
     ~ClothRenderer();
 
-    void RenderCloth(ClothHandler& cloth, Shader shader);
-    void RenderVertices(ClothHandler& cloth, Shader shader);    // used to render only the vertices by rendering a dot on each cloth vertex position
+    void RenderCloth(ClothHandler& cloth, Shader& shader);
+    void RenderVertices(ClothHandler& cloth, Shader& shader);    // used to render only the vertices by rendering a dot on each cloth vertex position
+    void RenderSprings(ClothHandler& cloth, Shader& shader);
 
 private:
 
@@ -21,9 +22,11 @@ private:
 
     unsigned int vertexVBO;
     unsigned int vertexVAO;
-    unsigned int vertexEBO[9];
+    unsigned int vertexEBOs[9];
+    unsigned int springEBOs[20];
 
     unsigned int rowIndices[9][20];
+    unsigned int springIndices[20][10];
 };
 
 #endif // !CLOTH_RENDERER_H

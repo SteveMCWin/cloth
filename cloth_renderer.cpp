@@ -32,8 +32,30 @@ ClothRenderer::ClothRenderer(){
     // }
     // std::cout << "}" << std::endl;
 
+    // horizontal
+    // 0 1 2 ... 7 8 9
+    // 10 11 12 ... 17 18 19
+    //
+    // vertical
+    // 0 10 20 ... 70 80 90
+    // 1 11 21 ... 71 81 91
+
+    for(int i = 0; i < 10; i++){
+        for(int j = 0; j < 10; j++){
+            this->springIndices[i][j] = 10 * i + j;
+            this->springIndices[i+10][j] = i + 10 * j;
+        }
+    }
+
+    // for(int i = 0; i < 20; i++){
+    //     for(int j = 0; j < 10; j++){
+    //         std::cout << springIndices[i][j] << ", ";
+    //     }
+    //     std::cout << std::endl;
+    // }
+
     glGenBuffers(1, &this->vertexVBO);
-    glGenBuffers(9, this->vertexEBO);
+    glGenBuffers(9, this->vertexEBOs);
     glGenVertexArrays(1, &this->vertexVAO);
     glBindBuffer(GL_ARRAY_BUFFER, this->vertexVBO);
     glBindVertexArray(this->vertexVAO);
@@ -43,8 +65,15 @@ ClothRenderer::ClothRenderer(){
     glEnableVertexAttribArray(0);
 
     for(int i = 0; i < 9; i++){
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vertexEBO[i]);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vertexEBOs[i]);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->rowIndices[i]), this->rowIndices[i], GL_STATIC_DRAW);
+    }
+
+    glGenBuffers(20, this->springEBOs);
+
+    for(int i = 0; i < 20; i++){
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->springEBOs[i]);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->springIndices[i]), this->springIndices[i], GL_STATIC_DRAW);
     }
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
@@ -57,12 +86,12 @@ ClothRenderer::~ClothRenderer(){
     glDeleteBuffers(1, &this->vertexVBO);
 }
 
-void ClothRenderer::RenderCloth(ClothHandler& cloth, Shader shader){
+void ClothRenderer::RenderCloth(ClothHandler& cloth, Shader& shader){
 
     setUpRendering(cloth, shader);
 
     for(int i = 0; i < 9; i++){
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vertexEBO[i]);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vertexEBOs[i]);
         glDrawElements(GL_TRIANGLE_STRIP, 20, GL_UNSIGNED_INT, 0);
     }
 
@@ -70,15 +99,30 @@ void ClothRenderer::RenderCloth(ClothHandler& cloth, Shader shader){
 
 }
 
-void ClothRenderer::RenderVertices(ClothHandler& cloth, Shader shader){
+void ClothRenderer::RenderVertices(ClothHandler& cloth, Shader& shader){
 
     setUpRendering(cloth, shader);
+
+    glDisable(GL_DEPTH_TEST);
 
     glDrawArrays(GL_POINTS, 0, 100);    // render all 100 points
     glBindVertexArray(0);
 
+    glEnable(GL_DEPTH_TEST);
 }
 
+
+void ClothRenderer::RenderSprings(ClothHandler& cloth, Shader& shader){
+
+    setUpRendering(cloth, shader);
+
+    glDisable(GL_DEPTH_TEST);
+    for(int i = 0; i < 20; i++){
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->springEBOs[i]);
+        glDrawElements(GL_LINE_STRIP, 10, GL_UNSIGNED_INT, 0);
+    }
+    glEnable(GL_DEPTH_TEST);
+}
 
 void ClothRenderer::fillVertBuffer(ClothHandler& cloth){
     glBindVertexArray(this->vertexVAO);
@@ -106,7 +150,7 @@ void ClothRenderer::fillVertBuffer(ClothHandler& cloth){
 
 void ClothRenderer::setUpRendering(ClothHandler& cloth, Shader& shader){
 
-    fillVertBuffer(cloth);
+    fillVertBuffer(cloth);  // note: very wastefull atm if rendering cloth and springs and points at the same time
 
     glm::mat4 model = glm::mat4(1.0f);
     glm::mat4 view = glm::mat4(1.0f);
