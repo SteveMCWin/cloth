@@ -99,12 +99,12 @@ int main(int, char**){
 
         // It looks like the vertices themselves are not being updated, make sure you didn't forget to put a reference somewhere
 
-        // for(int i = 0; i < 10; i++){
-        //     for(int j = 0; j < 10; j++){
-        //         printVec3(handler.cloth_vertices[i][j].position);
-        //     }
-        // }
-        // std::cout << std::endl << std::endl;
+        for(int i = 0; i < 10; i++){
+            for(int j = 0; j < 10; j++){
+                printVec3(handler.cloth_vertices[i][j].position);
+            }
+        }
+        std::cout << std::endl << std::endl;
 
         glfwSwapBuffers(window);
         glfwPollEvents();

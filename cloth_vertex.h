@@ -13,13 +13,14 @@ public:
 
     glm::vec3 position;
     glm::vec3 previous_position;
-    glm::vec3 force_applied;
+    // glm::vec3 force_applied;
     float mass;
 
     // so the idea is that the cloth handler will fist calculate the firce from the springs
     // and then pass that force and delta time to this function so the vertices actually move, after they are in the right position
     // the cloth renderer will render the cloth :O
     void ApplyForce(glm::vec3 force, float delta_t);    // calculated using Verlet Integration (i think?)
+    void operator=(const ClothVertex& v);
 
 };
 

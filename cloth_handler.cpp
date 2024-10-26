@@ -30,7 +30,7 @@ ClothHandler::ClothHandler(){
             // ...
             // v97 v98
             // v98 v99
-            horizontal_structural_springs[i][j] = Spring(1.0f, 0.2f, this->cloth_vertices[i][j], this->cloth_vertices[i][j+1]);
+            horizontal_structural_springs[i][j] = Spring(1.0f, 0.2f, &this->cloth_vertices[i][j], &this->cloth_vertices[i][j+1]);
         }
     }
     for(int i = 0; i < 9; i++){
@@ -51,7 +51,7 @@ ClothHandler::ClothHandler(){
             // ...
             // v88 v98
             // v89 v99
-            vertical_structural_springs[i][j] = Spring(1.0f, 0.2f, this->cloth_vertices[i][j], this->cloth_vertices[i+1][j]);
+            vertical_structural_springs[i][j] = Spring(1.0f, 0.2f, &this->cloth_vertices[i][j], &this->cloth_vertices[i+1][j]);
         }
     }
 
@@ -66,12 +66,12 @@ ClothHandler::ClothHandler(glm::vec3 positions[10][10], float masses[10][10], fl
 
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 9; j++){
-            horizontal_structural_springs[i][j] = Spring(spring_stiffness, spring_rest_len, this->cloth_vertices[i][j], this->cloth_vertices[i][j+1]);
+            horizontal_structural_springs[i][j] = Spring(spring_stiffness, spring_rest_len, &this->cloth_vertices[i][j], &this->cloth_vertices[i][j+1]);
         }
     }
     for(int i = 0; i < 9; i++){
         for(int j = 0; j < 10; j++){
-            vertical_structural_springs[i][j] = Spring(spring_stiffness, spring_rest_len, this->cloth_vertices[i][j], this->cloth_vertices[i+1][j]);
+            vertical_structural_springs[i][j] = Spring(spring_stiffness, spring_rest_len, &this->cloth_vertices[i][j], &this->cloth_vertices[i+1][j]);
         }
     }
 }
