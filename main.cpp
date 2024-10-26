@@ -23,6 +23,9 @@ const unsigned int SCR_HEIGHT   =  900;
 float delta_time = 0.0f;
 float last_frame = 0.0f;
 
+// bool n_pressed = false;
+// bool n_released = false;
+
 int main(int, char**){
 
     glfwInit();
@@ -77,8 +80,10 @@ int main(int, char**){
         }
     }
 
-    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, 50.0f, 0.1f);
+    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, 500.0f, 0.2f);
     ClothRenderer renderer;
+
+    handler.PinVertices(glm::vec2(9.0f, 0.0f), glm::vec2(9.0f, 9.0f));
 
     while(!glfwWindowShouldClose(window)){
 
@@ -97,14 +102,18 @@ int main(int, char**){
         renderer.RenderCloth(handler, cloth_vertex_shader);
         renderer.RenderSprings(handler, spring_shader);
 
-        // It looks like the vertices themselves are not being updated, make sure you didn't forget to put a reference somewhere
+        // used to step through one frame at a time
+        // while(!n_pressed) processInput(window);
+        // while(!n_released) processInput(window);
+        // n_pressed = false;
+        // n_released = false;
 
-        for(int i = 0; i < 10; i++){
-            for(int j = 0; j < 10; j++){
-                printVec3(handler.cloth_vertices[i][j].position);
-            }
-        }
-        std::cout << std::endl << std::endl;
+        // for(int i = 0; i < 10; i++){
+        //     for(int j = 0; j < 10; j++){
+        //         printVec3(handler.cloth_vertices[i][j].position);
+        //     }
+        // }
+        // std::cout << std::endl << std::endl;
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -124,6 +133,12 @@ void processInput(GLFWwindow* window){
     if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
         glfwSetWindowShouldClose(window, true);
     }
+    // if(glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS){
+    //     n_pressed = true;
+    // }
+    // if(glfwGetKey(window, GLFW_KEY_N) == GLFW_RELEASE){
+    //     n_released = true;
+    // }
 }
 
 void printVec3(glm::vec3 vec){

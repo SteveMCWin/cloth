@@ -4,6 +4,7 @@
 #include "glad.h"
 #include <glm/detail/type_vec.hpp>
 #include <glm/glm.hpp>
+#include <iostream>
 
 #include "cloth_vertex.h"
 #include "spring.h"
@@ -21,7 +22,7 @@ public:
     ClothHandler();
     ClothHandler(glm::vec3 positions[10][10], float masses[10][10], float spring_stiffness, float spring_rest_len);
     void UpdateVertices(float delta_t);  // i think the idea should be that we update all the vertices seemingly at once, so if one particle of the spring moves the other won't see it instantly 
-    //void UpdateSprings();
+    void PinVertices(glm::vec2 v1, glm::vec2 v2);
 
 };
 

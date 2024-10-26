@@ -15,6 +15,7 @@ public:
     glm::vec3 previous_position;
     // glm::vec3 force_applied;
     float mass;
+    bool is_pinned;
 
     // so the idea is that the cloth handler will fist calculate the firce from the springs
     // and then pass that force and delta time to this function so the vertices actually move, after they are in the right position

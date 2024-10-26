@@ -100,7 +100,10 @@ void ClothHandler::UpdateVertices(float delta_t){
     }
 }
 
-
+void ClothHandler::PinVertices(glm::vec2 v1, glm::vec2 v2){
+    cloth_vertices[(int)v1.x][(int)v1.y].is_pinned = true;
+    cloth_vertices[(int)v2.x][(int)v2.y].is_pinned = true;
+}
 
 
 
