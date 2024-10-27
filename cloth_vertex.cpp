@@ -28,7 +28,7 @@ void ClothVertex::ApplyForce(glm::vec3 force, float delta_time){
     // std::cout << "F: {" << force.x << ", " << force.y << ", " << force.z << "}" << std::endl;
     if(is_pinned) return;
 
-    glm::vec3 new_pos = 2.0f * this->position - this->previous_position + force * delta_time * delta_time * delta_time * delta_time * delta_time * delta_time * delta_time;// * delta_time;
+    glm::vec3 new_pos = 2.0f * this->position - this->previous_position + force * delta_time * delta_time;// * delta_time;// * delta_time * delta_time;// * delta_time;// * delta_time;// * delta_time;
     this->previous_position = this->position;
     this->position = new_pos;
     // std::cout << "pos diff: " << glm::length(this->position - this->previous_position) << std::endl;

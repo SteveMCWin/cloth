@@ -89,13 +89,13 @@ void ClothHandler::UpdateVertices(float delta_t){
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 9; j++){
             glm::vec3 total_force = h_spring_forces[i][j];// + this->cloth_vertices[0][0].mass * glm::vec3(0.0f, -9.8f, 0.0f); // should add damping and make gravity vec global
-            horizontal_structural_springs[i][j].ApplyForce(total_force, delta_t);
+            horizontal_structural_springs[i][j].ApplyForce(total_force/2.0f, delta_t);
         }
     }
     for(int i = 0; i < 9; i++){
         for(int j = 0; j < 10; j++){
             glm::vec3 total_force = v_spring_forces[i][j];// + this->cloth_vertices[0][0].mass * glm::vec3(0.0f, -9.8f, 0.0f); // should add damping and make gravity vec global
-            vertical_structural_springs[i][j].ApplyForce(total_force, delta_t);
+            vertical_structural_springs[i][j].ApplyForce(total_force/2.0f, delta_t);
         }
     }
 }

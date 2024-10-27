@@ -76,7 +76,7 @@ int main(int, char**){
     for(int i = 0; i < 10; i++){    // Generating position data for each cloth vertex
         for(int j = 0; j < 10; j++){
             cloth_vertex_positions[i][j] = glm::vec3(0.2f * (j-5), 0.2f * (i-5), -1.0f);
-            masses[i][j] = 1.0f;
+            masses[i][j] = 0.005f;
         }
     }
 
