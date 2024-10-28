@@ -78,7 +78,7 @@ ClothHandler::ClothHandler(glm::vec3 positions[10][10], float masses[10][10], fl
 
 void ClothHandler::UpdateVertices(float delta_t){
 
-    glm::vec3 h_spring_forces[10][9];
+    glm::vec3 h_spring_forces[10][9];       // don't actually need these, can just calculate the spring force and use it directly in the spring class, so just call applyForce
     glm::vec3 v_spring_forces[9][10];
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 9; j++){

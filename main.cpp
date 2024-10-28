@@ -76,11 +76,11 @@ int main(int, char**){
     for(int i = 0; i < 10; i++){    // Generating position data for each cloth vertex
         for(int j = 0; j < 10; j++){
             cloth_vertex_positions[i][j] = glm::vec3(0.2f * (j-5), 0.2f * (i-5), -1.0f);
-            masses[i][j] = 0.005f;
+            masses[i][j] = 0.003f;
         }
     }
 
-    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, 500.0f, 0.2f);
+    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, 50.0f, 0.2f);
     ClothRenderer renderer;
 
     handler.PinVertices(glm::vec2(9.0f, 0.0f), glm::vec2(9.0f, 9.0f));
