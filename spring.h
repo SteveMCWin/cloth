@@ -13,7 +13,7 @@ public:
     Spring(float stiff, float rest_len, ClothVertex* v1, ClothVertex* v2);
 
     glm::vec3 calculateSpringForce();
-    void ApplyForce(glm::vec3 force, float delta_t, bool should_apply = true);
+    void AddForce(float delta_t);
 
     // void operator=(const Spring& s);
 

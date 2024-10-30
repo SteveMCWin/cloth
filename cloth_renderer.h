@@ -23,10 +23,12 @@ private:
     unsigned int vertexVBO;
     unsigned int vertexVAO;
     unsigned int vertexEBOs[9];
-    unsigned int springEBOs[20];
+    unsigned int structuralSpringEBOs[20];
+    unsigned int sheerSpringEBOs[2];
 
     unsigned int rowIndices[9][20];
-    unsigned int springIndices[20][10];
+    unsigned int structuralSpringIndices[20][10];
+    unsigned int sheerSpringIndices[2][162];
 };
 
 #endif // !CLOTH_RENDERER_H

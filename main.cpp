@@ -80,7 +80,7 @@ int main(int, char**){
         }
     }
 
-    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, 50.0f, 0.2f);
+    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, 250.0f, 0.2f);
     ClothRenderer renderer;
 
     handler.PinVertices(glm::vec2(9.0f, 0.0f), glm::vec2(9.0f, 9.0f));

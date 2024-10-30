@@ -42,8 +42,8 @@ ClothRenderer::ClothRenderer(){
 
     for(int i = 0; i < 10; i++){
         for(int j = 0; j < 10; j++){
-            this->springIndices[i][j] = 10 * i + j;
-            this->springIndices[i+10][j] = i + 10 * j;
+            this->structuralSpringIndices[i][j] = 10 * i + j;
+            this->structuralSpringIndices[i+10][j] = i + 10 * j;
         }
     }
 
@@ -53,6 +53,24 @@ ClothRenderer::ClothRenderer(){
     //     }
     //     std::cout << std::endl;
     // }
+
+    int idx = 0;
+
+    for(int i = 0; i < 9; i++){
+        for(int j = 0; j < 9; j++){
+            this->sheerSpringIndices[0][idx++] = 10*i+j;
+            this->sheerSpringIndices[0][idx++] = 10*i+j+11;
+        }
+    }
+
+    idx = 0;
+
+    for(int i = 0; i < 9; i++){
+        for(int j = 0; j < 9; j++){
+            this->sheerSpringIndices[1][idx++] = 10*i+j+10;
+            this->sheerSpringIndices[1][idx++] = 10*i+j+1;
+        }
+    }
 
     glGenBuffers(1, &this->vertexVBO);
     glGenBuffers(9, this->vertexEBOs);
@@ -69,12 +87,19 @@ ClothRenderer::ClothRenderer(){
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->rowIndices[i]), this->rowIndices[i], GL_STATIC_DRAW);
     }
 
-    glGenBuffers(20, this->springEBOs);
+    glGenBuffers(20, this->structuralSpringEBOs);
 
     for(int i = 0; i < 20; i++){
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->springEBOs[i]);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->springIndices[i]), this->springIndices[i], GL_STATIC_DRAW);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->structuralSpringEBOs[i]);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->structuralSpringIndices[i]), this->structuralSpringIndices[i], GL_STATIC_DRAW);
     }
+
+    glGenBuffers(2, this->sheerSpringEBOs);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->sheerSpringEBOs[0]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->sheerSpringIndices[0]), this->sheerSpringIndices[0], GL_STATIC_DRAW);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->sheerSpringEBOs[1]);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->sheerSpringIndices[1]), this->sheerSpringIndices[1], GL_STATIC_DRAW);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -118,8 +143,12 @@ void ClothRenderer::RenderSprings(ClothHandler& cloth, Shader& shader){
 
     glDisable(GL_DEPTH_TEST);
     for(int i = 0; i < 20; i++){
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->springEBOs[i]);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->structuralSpringEBOs[i]);
         glDrawElements(GL_LINE_STRIP, 10, GL_UNSIGNED_INT, 0);
+    }
+    for(int i = 0; i < 2; i++){
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->sheerSpringEBOs[i]);
+        glDrawElements(GL_LINES, 162, GL_UNSIGNED_INT, 0);
     }
     glEnable(GL_DEPTH_TEST);
 }
