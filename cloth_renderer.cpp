@@ -45,6 +45,16 @@ ClothRenderer::ClothRenderer(){
             this->verticalStructuralSpringIndices[i][j] = i + Global::cloth_rows * j;
         }
     }
+    // for(int i = 0; i < Global::cloth_cols; i++){
+    //     for(int j = 0; j < Global::cloth_rows; j++){
+    //         // this->structuralSpringIndices[i][j] = 10 * i + j;
+    //         // this->structuralSpringIndices[i+10][j] = i + 10 * j;
+    //         // this->verticalStructuralSpringIndices[i][j] = i + Global::cloth_rows * j;
+    //         std::cout << this->verticalStructuralSpringIndices[i][j] << "   ";
+    //     }
+    //     std::cout << std::endl;
+    // }
+
 
     int idx = 0;
 
@@ -152,7 +162,7 @@ void ClothRenderer::RenderSprings(ClothHandler& cloth, Shader& shader){
     }
     for(int i = 0; i < Global::cloth_cols; i++){
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->structuralSpringEBOs[i+Global::cloth_rows]);
-        glDrawElements(GL_LINE_STRIP, Global::Global::cloth_rows, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_LINE_STRIP, Global::cloth_rows, GL_UNSIGNED_INT, 0);
     }
     for(int i = 0; i < 2; i++){
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->sheerSpringEBOs[i]);

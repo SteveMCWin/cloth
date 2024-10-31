@@ -14,7 +14,7 @@ public:
     static glm::mat4 projection;
     static glm::vec3 gravity;
     static const unsigned int cloth_cols = 10;
-    static const unsigned int cloth_rows = 10;
+    static const unsigned int cloth_rows = 15;
     static constexpr float subdivision_length = 0.2f;
 
 };

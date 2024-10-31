@@ -88,13 +88,15 @@ void ClothHandler::UpdateVertices(float delta_t){
             this->horizontal_structural_springs[i][j].AddForce(delta_t);
         }
     }
+
     for(int i = 0; i < Global::cloth_rows-1; i++){
         for(int j = 0; j < Global::cloth_cols; j++){
             this->vertical_structural_springs[i][j].AddForce(delta_t);
         }
     }
+
     for(int i = 0; i < Global::cloth_rows-1; i++){
-        for(int j = 0; j < Global::cloth_rows-1; j++){
+        for(int j = 0; j < Global::cloth_cols-1; j++){
             this->falling_shear_springs[i][j].AddForce(delta_t);
             this->rising_shear_springs[i][j].AddForce(delta_t);
         }
@@ -108,8 +110,8 @@ void ClothHandler::UpdateVertices(float delta_t){
 }
 
 void ClothHandler::PinVertices(glm::vec2 v1, glm::vec2 v2){
-    cloth_vertices[(int)v1.x][(int)v1.y].is_pinned = true;
-    cloth_vertices[(int)v2.x][(int)v2.y].is_pinned = true;
+    this->cloth_vertices[(int)v1.x][(int)v1.y].is_pinned = true;
+    this->cloth_vertices[(int)v2.x][(int)v2.y].is_pinned = true;
 }
 
 
