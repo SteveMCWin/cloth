@@ -225,6 +225,30 @@ glad.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/glad.c.s
 .PHONY : glad.c.s
 
+global.o: global.cpp.o
+.PHONY : global.o
+
+# target to build an object file
+global.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/global.cpp.o
+.PHONY : global.cpp.o
+
+global.i: global.cpp.i
+.PHONY : global.i
+
+# target to preprocess a source file
+global.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/global.cpp.i
+.PHONY : global.cpp.i
+
+global.s: global.cpp.s
+.PHONY : global.s
+
+# target to generate assembly for a file
+global.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/global.cpp.s
+.PHONY : global.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -294,6 +318,9 @@ help:
 	@echo "... glad.o"
 	@echo "... glad.i"
 	@echo "... glad.s"
+	@echo "... global.o"
+	@echo "... global.i"
+	@echo "... global.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

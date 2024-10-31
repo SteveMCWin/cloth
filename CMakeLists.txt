@@ -19,7 +19,8 @@ add_executable(my_opengl_project
     cloth_vertex.cpp
     cloth_renderer.cpp
     spring.cpp
-    cloth_handler.cpp)
+    cloth_handler.cpp
+    global.cpp)
 
 include_directories(/urs/include/freetype2 -I/usr/local/include/freetype2 -I/usr/include/libpng16)
 

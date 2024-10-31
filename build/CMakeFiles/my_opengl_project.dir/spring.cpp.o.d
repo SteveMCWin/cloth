@@ -1,6 +1,8 @@
 CMakeFiles/my_opengl_project.dir/spring.cpp.o: \
  /home/stevica/openGL_projects/cloth/spring.cpp \
  /usr/include/stdc-predef.h /home/stevica/openGL_projects/cloth/spring.h \
+ /usr/local/include/glm/detail/func_geometric.hpp \
+ /usr/local/include/glm/detail/type_vec3.hpp \
  /usr/local/include/glm/detail/type_vec.hpp \
  /usr/local/include/glm/detail/precision.hpp \
  /usr/local/include/glm/detail/setup.hpp /usr/include/c++/11/cassert \
@@ -63,7 +65,19 @@ CMakeFiles/my_opengl_project.dir/spring.cpp.o: \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
- /usr/local/include/glm/glm.hpp /usr/local/include/glm/detail/_fixes.hpp \
+ /usr/local/include/glm/detail/type_vec3.inl \
+ /usr/local/include/glm/detail/func_geometric.inl \
+ /usr/local/include/glm/detail/func_exponential.hpp \
+ /usr/local/include/glm/detail/type_vec1.hpp \
+ /usr/local/include/glm/fwd.hpp \
+ /usr/local/include/glm/detail/type_float.hpp \
+ /usr/local/include/glm/detail/type_mat.hpp \
+ /usr/local/include/glm/detail/type_vec1.inl \
+ /usr/local/include/glm/detail/type_vec2.hpp \
+ /usr/local/include/glm/detail/type_vec2.inl \
+ /usr/local/include/glm/detail/type_vec4.hpp \
+ /usr/local/include/glm/detail/type_vec4.inl \
+ /usr/local/include/glm/detail/type_vec4_simd.inl \
  /usr/include/c++/11/cmath /usr/include/c++/11/bits/cpp_type_traits.h \
  /usr/include/c++/11/ext/type_traits.h /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
@@ -99,66 +113,7 @@ CMakeFiles/my_opengl_project.dir/spring.cpp.o: \
  /usr/include/c++/11/tr1/modified_bessel_func.tcc \
  /usr/include/c++/11/tr1/poly_hermite.tcc \
  /usr/include/c++/11/tr1/poly_laguerre.tcc \
- /usr/include/c++/11/tr1/riemann_zeta.tcc /usr/include/c++/11/climits \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h \
- /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
- /usr/include/x86_64-linux-gnu/bits/local_lim.h \
- /usr/include/linux/limits.h \
- /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
- /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
- /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
- /usr/include/x86_64-linux-gnu/bits/uio_lim.h /usr/include/c++/11/cfloat \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/float.h \
- /usr/local/include/glm/fwd.hpp \
- /usr/local/include/glm/detail/type_float.hpp \
- /usr/local/include/glm/detail/type_mat.hpp \
- /usr/local/include/glm/vec2.hpp \
- /usr/local/include/glm/detail/type_vec2.hpp \
- /usr/local/include/glm/detail/type_vec2.inl \
- /usr/local/include/glm/vec3.hpp \
- /usr/local/include/glm/detail/type_vec3.hpp \
- /usr/local/include/glm/detail/type_vec3.inl \
- /usr/local/include/glm/vec4.hpp \
- /usr/local/include/glm/detail/type_vec4.hpp \
- /usr/local/include/glm/detail/type_vec4.inl \
- /usr/local/include/glm/detail/type_vec4_simd.inl \
- /usr/local/include/glm/mat2x2.hpp \
- /usr/local/include/glm/detail/type_mat2x2.hpp \
- /usr/local/include/glm/detail/type_mat2x2.inl \
- /usr/local/include/glm/detail/func_matrix.hpp \
- /usr/local/include/glm/mat2x3.hpp \
- /usr/local/include/glm/detail/type_mat2x3.hpp \
- /usr/local/include/glm/detail/type_mat2x3.inl \
- /usr/local/include/glm/mat2x4.hpp \
- /usr/local/include/glm/detail/type_mat2x4.hpp \
- /usr/local/include/glm/detail/type_mat2x4.inl \
- /usr/local/include/glm/mat3x2.hpp \
- /usr/local/include/glm/detail/type_mat3x2.hpp \
- /usr/local/include/glm/detail/type_mat3x2.inl \
- /usr/local/include/glm/mat3x3.hpp \
- /usr/local/include/glm/detail/type_mat3x3.hpp \
- /usr/local/include/glm/detail/type_mat3x3.inl \
- /usr/local/include/glm/mat3x4.hpp \
- /usr/local/include/glm/detail/type_mat3x4.hpp \
- /usr/local/include/glm/detail/type_mat3x4.inl \
- /usr/local/include/glm/mat4x2.hpp \
- /usr/local/include/glm/detail/type_mat4x2.hpp \
- /usr/local/include/glm/detail/type_mat4x2.inl \
- /usr/local/include/glm/mat4x3.hpp \
- /usr/local/include/glm/detail/type_mat4x3.hpp \
- /usr/local/include/glm/detail/type_mat4x3.inl \
- /usr/local/include/glm/mat4x4.hpp \
- /usr/local/include/glm/detail/type_mat4x4.hpp \
- /usr/local/include/glm/detail/type_mat4x4.inl \
- /usr/local/include/glm/detail/type_mat4x4_simd.inl \
- /usr/local/include/glm/detail/func_matrix.inl \
- /usr/local/include/glm/geometric.hpp \
- /usr/local/include/glm/detail/func_geometric.hpp \
- /usr/local/include/glm/detail/func_geometric.inl \
- /usr/local/include/glm/detail/func_exponential.hpp \
- /usr/local/include/glm/detail/type_vec1.hpp \
- /usr/local/include/glm/detail/type_vec1.inl \
+ /usr/include/c++/11/tr1/riemann_zeta.tcc \
  /usr/local/include/glm/detail/func_exponential.inl \
  /usr/local/include/glm/detail/func_vector_relational.hpp \
  /usr/local/include/glm/detail/func_vector_relational.inl \
@@ -252,7 +207,50 @@ CMakeFiles/my_opengl_project.dir/spring.cpp.o: \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/prfchwintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/keylockerintrin.h \
  /usr/local/include/glm/detail/func_geometric_simd.inl \
- /usr/local/include/glm/simd/geometric.h \
+ /usr/local/include/glm/simd/geometric.h /usr/local/include/glm/glm.hpp \
+ /usr/local/include/glm/detail/_fixes.hpp /usr/include/c++/11/climits \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h \
+ /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/local_lim.h \
+ /usr/include/linux/limits.h \
+ /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
+ /usr/include/x86_64-linux-gnu/bits/posix2_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/xopen_lim.h \
+ /usr/include/x86_64-linux-gnu/bits/uio_lim.h /usr/include/c++/11/cfloat \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/float.h \
+ /usr/local/include/glm/vec2.hpp /usr/local/include/glm/vec3.hpp \
+ /usr/local/include/glm/vec4.hpp /usr/local/include/glm/mat2x2.hpp \
+ /usr/local/include/glm/detail/type_mat2x2.hpp \
+ /usr/local/include/glm/detail/type_mat2x2.inl \
+ /usr/local/include/glm/detail/func_matrix.hpp \
+ /usr/local/include/glm/mat2x3.hpp \
+ /usr/local/include/glm/detail/type_mat2x3.hpp \
+ /usr/local/include/glm/detail/type_mat2x3.inl \
+ /usr/local/include/glm/mat2x4.hpp \
+ /usr/local/include/glm/detail/type_mat2x4.hpp \
+ /usr/local/include/glm/detail/type_mat2x4.inl \
+ /usr/local/include/glm/mat3x2.hpp \
+ /usr/local/include/glm/detail/type_mat3x2.hpp \
+ /usr/local/include/glm/detail/type_mat3x2.inl \
+ /usr/local/include/glm/mat3x3.hpp \
+ /usr/local/include/glm/detail/type_mat3x3.hpp \
+ /usr/local/include/glm/detail/type_mat3x3.inl \
+ /usr/local/include/glm/mat3x4.hpp \
+ /usr/local/include/glm/detail/type_mat3x4.hpp \
+ /usr/local/include/glm/detail/type_mat3x4.inl \
+ /usr/local/include/glm/mat4x2.hpp \
+ /usr/local/include/glm/detail/type_mat4x2.hpp \
+ /usr/local/include/glm/detail/type_mat4x2.inl \
+ /usr/local/include/glm/mat4x3.hpp \
+ /usr/local/include/glm/detail/type_mat4x3.hpp \
+ /usr/local/include/glm/detail/type_mat4x3.inl \
+ /usr/local/include/glm/mat4x4.hpp \
+ /usr/local/include/glm/detail/type_mat4x4.hpp \
+ /usr/local/include/glm/detail/type_mat4x4.inl \
+ /usr/local/include/glm/detail/type_mat4x4_simd.inl \
+ /usr/local/include/glm/detail/func_matrix.inl \
+ /usr/local/include/glm/geometric.hpp \
  /usr/local/include/glm/detail/func_matrix_simd.inl \
  /usr/local/include/glm/simd/matrix.h \
  /usr/local/include/glm/trigonometric.hpp \
@@ -275,4 +273,9 @@ CMakeFiles/my_opengl_project.dir/spring.cpp.o: \
  /usr/local/include/glm/simd/integer.h \
  /home/stevica/openGL_projects/cloth/cloth_vertex.h \
  /home/stevica/openGL_projects/cloth/glad.h \
- /usr/include/KHR/khrplatform.h
+ /usr/include/KHR/khrplatform.h \
+ /home/stevica/openGL_projects/cloth/global.h \
+ /usr/local/include/glm/gtc/matrix_transform.hpp \
+ /usr/local/include/glm/gtc/constants.hpp \
+ /usr/local/include/glm/gtc/constants.inl \
+ /usr/local/include/glm/gtc/matrix_transform.inl

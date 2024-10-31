@@ -3,8 +3,8 @@
 #include "spring.h"
 
 ClothHandler::ClothHandler(glm::vec3 positions[10][10], float masses[10][10], float spring_stiffness, float spring_rest_len){
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 10; j++){
+    for(int i = 0; i < Global::cloth_rows; i++){
+        for(int j = 0; j < Global::cloth_cols; j++){
             this->cloth_vertices[i][j] = ClothVertex(positions[i][j], masses[i][j]);
         }
     }
@@ -26,8 +26,8 @@ ClothHandler::ClothHandler(glm::vec3 positions[10][10], float masses[10][10], fl
     // ...
     // v97 v98
     // v98 v99
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 9; j++){
+    for(int i = 0; i < Global::cloth_rows; i++){
+        for(int j = 0; j < Global::cloth_cols-1; j++){
             horizontal_structural_springs[i][j] = Spring(spring_stiffness, spring_rest_len, &this->cloth_vertices[i][j], &this->cloth_vertices[i][j+1]);
         }
     }
@@ -48,8 +48,8 @@ ClothHandler::ClothHandler(glm::vec3 positions[10][10], float masses[10][10], fl
     // ...
     // v88 v98
     // v89 v99
-    for(int i = 0; i < 9; i++){
-        for(int j = 0; j < 10; j++){
+    for(int i = 0; i < Global::cloth_rows-1; i++){
+        for(int j = 0; j < Global::cloth_cols; j++){
             vertical_structural_springs[i][j] = Spring(spring_stiffness, spring_rest_len, &this->cloth_vertices[i][j], &this->cloth_vertices[i+1][j]);
         }
     }
@@ -66,8 +66,8 @@ ClothHandler::ClothHandler(glm::vec3 positions[10][10], float masses[10][10], fl
     // ...
     // v98 v89
     //
-    for(int i = 0; i < 9; i++){
-        for(int j = 0; j < 9; j++){
+    for(int i = 0; i < Global::cloth_rows-1; i++){
+        for(int j = 0; j < Global::cloth_cols-1; j++){
             falling_shear_springs[i][j] = Spring(spring_stiffness/10.0f, spring_rest_len * sqrt(2.0), &this->cloth_vertices[i][j], &this->cloth_vertices[i+1][j+1]);
             rising_shear_springs[i][j] = Spring(spring_stiffness/10.0f, spring_rest_len * sqrt(2.0), &this->cloth_vertices[i+1][j], &this->cloth_vertices[i][j+1]);
         }
@@ -76,31 +76,31 @@ ClothHandler::ClothHandler(glm::vec3 positions[10][10], float masses[10][10], fl
 
 void ClothHandler::UpdateVertices(float delta_t){
 
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 10; j++){
+    for(int i = 0; i < Global::cloth_rows; i++){
+        for(int j = 0; j < Global::cloth_cols; j++){
             this->cloth_vertices[i][j].ResetForce();
         }
     }
 
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 9; j++){
+    for(int i = 0; i < Global::cloth_rows; i++){
+        for(int j = 0; j < Global::cloth_cols-1; j++){
             this->horizontal_structural_springs[i][j].AddForce(delta_t);
         }
     }
-    for(int i = 0; i < 9; i++){
-        for(int j = 0; j < 10; j++){
+    for(int i = 0; i < Global::cloth_rows-1; i++){
+        for(int j = 0; j < Global::cloth_cols; j++){
             this->vertical_structural_springs[i][j].AddForce(delta_t);
         }
     }
-    for(int i = 0; i < 9; i++){
-        for(int j = 0; j < 9; j++){
+    for(int i = 0; i < Global::cloth_rows-1; i++){
+        for(int j = 0; j < Global::cloth_rows-1; j++){
             this->falling_shear_springs[i][j].AddForce(delta_t);
             this->rising_shear_springs[i][j].AddForce(delta_t);
         }
     }
 
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 10; j++){
+    for(int i = 0; i < Global::cloth_rows; i++){
+        for(int j = 0; j < Global::cloth_cols; j++){
             this->cloth_vertices[i][j].ApplyForce(delta_t);
         }
     }

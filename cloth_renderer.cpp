@@ -23,15 +23,6 @@ ClothRenderer::ClothRenderer(){
         }
     }
 
-    // std::cout << "{" << std::endl;
-    // for(int i = 0; i < 9; i++){
-    //     for(int j = 0; j < 10; j++){
-    //         std::cout << rowIndices[i][2*j] << ", " << rowIndices[i][2*j+1] << ", ";
-    //     }
-    //     std::cout << std::endl;
-    // }
-    // std::cout << "}" << std::endl;
-
     // horizontal
     // 0 1 2 ... 7 8 9
     // 10 11 12 ... 17 18 19
@@ -46,13 +37,6 @@ ClothRenderer::ClothRenderer(){
             this->structuralSpringIndices[i+10][j] = i + 10 * j;
         }
     }
-
-    // for(int i = 0; i < 20; i++){
-    //     for(int j = 0; j < 10; j++){
-    //         std::cout << springIndices[i][j] << ", ";
-    //     }
-    //     std::cout << std::endl;
-    // }
 
     int idx = 0;
 
@@ -186,11 +170,9 @@ void ClothRenderer::setUpRendering(ClothHandler& cloth, Shader& shader){
     glm::mat4 projection = glm::mat4(1.0f);
 
     view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));  // the view matrix will have to be initialized in main if I want camera movement 
-    projection = glm::perspective(glm::radians(45.0f), 16.0f/9.0f, 0.1f, 100.0f);   // will have to change this to use the global class at least to get the aspect ratio
 
     shader.use();
     shader.setMat4("view", view);
-    shader.setMat4("projection", projection);
     shader.setMat4("model", model);
 
     glBindVertexArray(this->vertexVAO);

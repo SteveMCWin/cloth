@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/my_opengl_project.dir/cloth_vertex.cpp.o.d"
   "CMakeFiles/my_opengl_project.dir/glad.c.o"
   "CMakeFiles/my_opengl_project.dir/glad.c.o.d"
+  "CMakeFiles/my_opengl_project.dir/global.cpp.o"
+  "CMakeFiles/my_opengl_project.dir/global.cpp.o.d"
   "CMakeFiles/my_opengl_project.dir/main.cpp.o"
   "CMakeFiles/my_opengl_project.dir/main.cpp.o.d"
   "CMakeFiles/my_opengl_project.dir/spring.cpp.o"

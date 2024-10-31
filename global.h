@@ -10,6 +10,12 @@
 class Global{
 public:
 
+    // static glm::mat4 view;
+    static glm::mat4 projection;
+    static glm::vec3 gravity;
+    static const unsigned int cloth_cols = 10;
+    static const unsigned int cloth_rows = 10;
+
 };
 
 #endif // !GLOBAL_H

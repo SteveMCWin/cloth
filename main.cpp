@@ -70,11 +70,19 @@ int main(int, char**){
     Shader spring_shader        = Shader("/home/stevica/openGL_projects/cloth/shaders/v_spring.glsl",
                                          "/home/stevica/openGL_projects/cloth/shaders/f_spring.glsl");
 
-    glm::vec3 cloth_vertex_positions[10][10];
-    float masses[10][10];
+    cloth_vertex_shader.use();
+    cloth_vertex_shader.setMat4("projection", Global::projection);
+    spring_shader.use();
+    spring_shader.setMat4("projection", Global::projection);
 
-    for(int i = 0; i < 10; i++){    // Generating position data for each cloth vertex
-        for(int j = 0; j < 10; j++){
+    const unsigned int cols = Global::cloth_cols;
+    const unsigned int rows = Global::cloth_rows;
+
+    glm::vec3 cloth_vertex_positions[rows][cols];
+    float masses[rows][cols];
+
+    for(int i = 0; i < rows; i++){    // Generating position data for each cloth vertex
+        for(int j = 0; j < cols; j++){
             cloth_vertex_positions[i][j] = glm::vec3(0.2f * (j-5), 0.2f * (i-5), -1.0f);
             masses[i][j] = 0.003f;
         }

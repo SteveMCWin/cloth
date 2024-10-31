@@ -1,10 +1,12 @@
 #ifndef SPRING_H
 #define SPRING_H
 
+#include <glm/detail/func_geometric.hpp>
 #include <glm/detail/type_vec.hpp>
 #include <glm/glm.hpp>
 
 #include "cloth_vertex.h"
+#include "global.h"
 
 class Spring {
 

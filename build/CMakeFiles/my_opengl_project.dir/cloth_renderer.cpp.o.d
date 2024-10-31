@@ -358,14 +358,14 @@ CMakeFiles/my_opengl_project.dir/cloth_renderer.cpp.o: \
  /usr/include/c++/11/bits/istream.tcc \
  /home/stevica/openGL_projects/cloth/cloth_vertex.h \
  /home/stevica/openGL_projects/cloth/spring.h \
+ /home/stevica/openGL_projects/cloth/global.h \
+ /usr/local/include/glm/gtc/matrix_transform.hpp \
+ /usr/local/include/glm/gtc/constants.hpp \
+ /usr/local/include/glm/gtc/constants.inl \
+ /usr/local/include/glm/gtc/matrix_transform.inl \
  /home/stevica/openGL_projects/cloth/shader.h /usr/include/c++/11/fstream \
  /usr/include/c++/11/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
  /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/sstream \
- /usr/include/c++/11/bits/sstream.tcc \
- /home/stevica/openGL_projects/cloth/global.h \
- /usr/local/include/glm/gtc/matrix_transform.hpp \
- /usr/local/include/glm/gtc/constants.hpp \
- /usr/local/include/glm/gtc/constants.inl \
- /usr/local/include/glm/gtc/matrix_transform.inl
+ /usr/include/c++/11/bits/sstream.tcc
