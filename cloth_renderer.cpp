@@ -16,10 +16,10 @@ ClothRenderer::ClothRenderer(){
     //             ...
     // 80 90 81 91 ... 88 98 89 99
     
-    for(int i = 0; i < 9; i++){ // load indices so we can use triangle strip
-        for(int j = 0; j < 10; j++){
-            this->rowIndices[i][2*j]   = 10*i + j;
-            this->rowIndices[i][2*j+1] = 10*i + j + 10;
+    for(int i = 0; i < Global::cloth_rows-1; i++){ // load indices so we can use triangle strip
+        for(int j = 0; j < Global::cloth_cols; j++){
+            this->rowIndices[i][2*j]   = Global::cloth_cols*i + j;
+            this->rowIndices[i][2*j+1] = Global::cloth_cols*i + j + Global::cloth_cols;
         }
     }
 
@@ -31,51 +31,71 @@ ClothRenderer::ClothRenderer(){
     // 0 10 20 ... 70 80 90
     // 1 11 21 ... 71 81 91
 
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 10; j++){
-            this->structuralSpringIndices[i][j] = 10 * i + j;
-            this->structuralSpringIndices[i+10][j] = i + 10 * j;
+    for(int i = 0; i < Global::cloth_rows; i++){
+        for(int j = 0; j < Global::cloth_cols; j++){
+            // this->structuralSpringIndices[i][j] = 10 * i + j;
+            // this->structuralSpringIndices[i+10][j] = i + 10 * j;
+            this->horizontalStructuralSpringIndices[i][j] = Global::cloth_cols * i + j;
+        }
+    }
+    for(int i = 0; i < Global::cloth_cols; i++){
+        for(int j = 0; j < Global::cloth_rows; j++){
+            // this->structuralSpringIndices[i][j] = 10 * i + j;
+            // this->structuralSpringIndices[i+10][j] = i + 10 * j;
+            this->verticalStructuralSpringIndices[i][j] = i + Global::cloth_rows * j;
         }
     }
 
     int idx = 0;
 
-    for(int i = 0; i < 9; i++){
-        for(int j = 0; j < 9; j++){
-            this->sheerSpringIndices[0][idx++] = 10*i+j;
-            this->sheerSpringIndices[0][idx++] = 10*i+j+11;
+    // 0 11
+    // 1 12
+    // 2 13
+    // ...
+    for(int i = 0; i < Global::cloth_rows-1; i++){
+        for(int j = 0; j < Global::cloth_cols-1; j++){
+            this->sheerSpringIndices[0][idx++] = Global::cloth_cols*i+j;
+            this->sheerSpringIndices[0][idx++] = Global::cloth_cols*i+j+Global::cloth_cols+1;
         }
     }
 
     idx = 0;
 
-    for(int i = 0; i < 9; i++){
-        for(int j = 0; j < 9; j++){
-            this->sheerSpringIndices[1][idx++] = 10*i+j+10;
-            this->sheerSpringIndices[1][idx++] = 10*i+j+1;
+    // 10 1
+    // 11 2
+    // 12 3
+    // ...
+    for(int i = 0; i < Global::cloth_rows-1; i++){
+        for(int j = 0; j < Global::cloth_cols-1; j++){
+            this->sheerSpringIndices[1][idx++] = Global::cloth_cols*i+j+Global::cloth_cols;
+            this->sheerSpringIndices[1][idx++] = Global::cloth_cols*i+j+1;
         }
     }
 
     glGenBuffers(1, &this->vertexVBO);
-    glGenBuffers(9, this->vertexEBOs);
+    glGenBuffers(Global::cloth_rows-1, this->vertexEBOs);
     glGenVertexArrays(1, &this->vertexVAO);
     glBindBuffer(GL_ARRAY_BUFFER, this->vertexVBO);
     glBindVertexArray(this->vertexVAO);
 
-    glBufferData(GL_ARRAY_BUFFER, 300 * sizeof(float), NULL, GL_DYNAMIC_DRAW);  // just reserve space for the vertex positions in the vbo
+    glBufferData(GL_ARRAY_BUFFER, 3 * Global::cloth_rows * Global::cloth_cols * sizeof(float), NULL, GL_DYNAMIC_DRAW);  // just reserve space for the vertex positions in the vbo
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
 
-    for(int i = 0; i < 9; i++){
+    for(int i = 0; i < Global::cloth_rows-1; i++){
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vertexEBOs[i]);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->rowIndices[i]), this->rowIndices[i], GL_STATIC_DRAW);
     }
 
-    glGenBuffers(20, this->structuralSpringEBOs);
+    glGenBuffers(Global::cloth_rows + Global::cloth_cols, this->structuralSpringEBOs);
 
-    for(int i = 0; i < 20; i++){
+    for(int i = 0; i < Global::cloth_rows; i++){
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->structuralSpringEBOs[i]);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->structuralSpringIndices[i]), this->structuralSpringIndices[i], GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->horizontalStructuralSpringIndices[i]), this->horizontalStructuralSpringIndices[i], GL_STATIC_DRAW);
+    }
+    for(int i = 0; i < Global::cloth_cols; i++){
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->structuralSpringEBOs[i + Global::cloth_rows]);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->verticalStructuralSpringIndices[i]), this->verticalStructuralSpringIndices[i], GL_STATIC_DRAW);
     }
 
     glGenBuffers(2, this->sheerSpringEBOs);
@@ -99,9 +119,9 @@ void ClothRenderer::RenderCloth(ClothHandler& cloth, Shader& shader){
 
     setUpRendering(cloth, shader);
 
-    for(int i = 0; i < 9; i++){
+    for(int i = 0; i < Global::cloth_rows-1; i++){
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vertexEBOs[i]);
-        glDrawElements(GL_TRIANGLE_STRIP, 20, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLE_STRIP, 2 * Global::cloth_cols, GL_UNSIGNED_INT, 0);
     }
 
     glBindVertexArray(0);
@@ -114,7 +134,7 @@ void ClothRenderer::RenderVertices(ClothHandler& cloth, Shader& shader){
 
     glDisable(GL_DEPTH_TEST);
 
-    glDrawArrays(GL_POINTS, 0, 100);    // render all 100 points
+    glDrawArrays(GL_POINTS, 0, Global::cloth_rows * Global::cloth_cols);    // render all 100 points
     glBindVertexArray(0);
 
     glEnable(GL_DEPTH_TEST);
@@ -126,13 +146,17 @@ void ClothRenderer::RenderSprings(ClothHandler& cloth, Shader& shader){
     setUpRendering(cloth, shader);
 
     glDisable(GL_DEPTH_TEST);
-    for(int i = 0; i < 20; i++){
+    for(int i = 0; i < Global::cloth_rows; i++){
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->structuralSpringEBOs[i]);
-        glDrawElements(GL_LINE_STRIP, 10, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_LINE_STRIP, Global::cloth_cols, GL_UNSIGNED_INT, 0);
+    }
+    for(int i = 0; i < Global::cloth_cols; i++){
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->structuralSpringEBOs[i+Global::cloth_rows]);
+        glDrawElements(GL_LINE_STRIP, Global::Global::cloth_rows, GL_UNSIGNED_INT, 0);
     }
     for(int i = 0; i < 2; i++){
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->sheerSpringEBOs[i]);
-        glDrawElements(GL_LINES, 162, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_LINES, 2 * (Global::cloth_rows-1) * (Global::cloth_cols-1), GL_UNSIGNED_INT, 0);
     }
     glEnable(GL_DEPTH_TEST);
 }
@@ -144,14 +168,14 @@ void ClothRenderer::fillVertBuffer(ClothHandler& cloth){
     // positions of each vertex are stored in separate cloth_vertex 
     // objects so the idea is to load all of them into one array
     // so they could be loaded into the vbo at once
-    float vertices_positions[300];
+    float vertices_positions[3*Global::cloth_rows*Global::cloth_cols];
 
-    for(int i = 0; i < 10; i++){
-        for(int j = 0; j < 10; j++){
+    for(int i = 0; i < Global::cloth_rows; i++){
+        for(int j = 0; j < Global::cloth_cols; j++){
             float vertex[3] = {cloth.cloth_vertices[i][j].position.x, cloth.cloth_vertices[i][j].position.y, cloth.cloth_vertices[i][j].position.z};
-            vertices_positions[30*i+3*j  ] = vertex[0];
-            vertices_positions[30*i+3*j+1] = vertex[1];
-            vertices_positions[30*i+3*j+2] = vertex[2];
+            vertices_positions[3*Global::cloth_cols*i+3*j  ] = vertex[0];
+            vertices_positions[3*Global::cloth_cols*i+3*j+1] = vertex[1];
+            vertices_positions[3*Global::cloth_cols*i+3*j+2] = vertex[2];   // if things don't work, it's probably this
         }
     }
 

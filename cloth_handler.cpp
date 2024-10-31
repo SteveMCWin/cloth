@@ -2,7 +2,8 @@
 #include <glm/vec3.hpp>
 #include "spring.h"
 
-ClothHandler::ClothHandler(glm::vec3 positions[10][10], float masses[10][10], float spring_stiffness, float spring_rest_len){
+ClothHandler::ClothHandler(glm::vec3 positions[Global::cloth_rows][Global::cloth_cols], float masses[Global::cloth_rows][Global::cloth_cols],
+                           float spring_stiffness, float spring_rest_len){
     for(int i = 0; i < Global::cloth_rows; i++){
         for(int j = 0; j < Global::cloth_cols; j++){
             this->cloth_vertices[i][j] = ClothVertex(positions[i][j], masses[i][j]);

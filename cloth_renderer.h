@@ -23,12 +23,14 @@ private:
     unsigned int vertexVBO;
     unsigned int vertexVAO;
     unsigned int vertexEBOs[Global::cloth_rows-1];
-    unsigned int structuralSpringEBOs[Global::cloth_rows+Global::cloth_cols];
+    unsigned int structuralSpringEBOs[Global::cloth_rows + Global::cloth_cols];
     unsigned int sheerSpringEBOs[2];
 
     unsigned int rowIndices[Global::cloth_rows-1][Global::cloth_cols*2];
-    unsigned int structuralSpringIndices[20][10];
-    unsigned int sheerSpringIndices[2][162];
+    // unsigned int structuralSpringIndices[20][10];
+    unsigned int horizontalStructuralSpringIndices[Global::cloth_rows][Global::cloth_cols];
+    unsigned int verticalStructuralSpringIndices[Global::cloth_cols][Global::cloth_rows];
+    unsigned int sheerSpringIndices[2][2*(Global::cloth_rows-1)*(Global::cloth_cols-1)];
 };
 
 #endif // !CLOTH_RENDERER_H

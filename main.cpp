@@ -83,15 +83,15 @@ int main(int, char**){
 
     for(int i = 0; i < rows; i++){    // Generating position data for each cloth vertex
         for(int j = 0; j < cols; j++){
-            cloth_vertex_positions[i][j] = glm::vec3(0.2f * (j-5), 0.2f * (i-5), -1.0f);
+            cloth_vertex_positions[i][j] = glm::vec3(Global::subdivision_length * (j-5), Global::subdivision_length * (i-5), -1.0f);
             masses[i][j] = 0.003f;
         }
     }
 
-    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, 250.0f, 0.2f);
+    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, 500.0f, Global::subdivision_length);
     ClothRenderer renderer;
 
-    handler.PinVertices(glm::vec2(9.0f, 0.0f), glm::vec2(9.0f, 9.0f));
+    handler.PinVertices(glm::vec2((float)(Global::cloth_rows-1), 0.0f), glm::vec2((float)(Global::cloth_rows-1), (float)(Global::cloth_cols-1)));
 
     while(!glfwWindowShouldClose(window)){
 
