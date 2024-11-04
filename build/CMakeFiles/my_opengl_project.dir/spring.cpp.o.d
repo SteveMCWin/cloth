@@ -278,4 +278,5 @@ CMakeFiles/my_opengl_project.dir/spring.cpp.o: \
  /usr/local/include/glm/gtc/matrix_transform.hpp \
  /usr/local/include/glm/gtc/constants.hpp \
  /usr/local/include/glm/gtc/constants.inl \
- /usr/local/include/glm/gtc/matrix_transform.inl
+ /usr/local/include/glm/gtc/matrix_transform.inl \
+ /usr/include/GLFW/glfw3.h

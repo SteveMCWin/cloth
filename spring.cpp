@@ -1,4 +1,6 @@
 #include "spring.h"
+#include "global.h"
+#include <GLFW/glfw3.h>
 
 Spring::Spring(){
     this->stiffness = 50.0f;
@@ -26,7 +28,18 @@ void Spring::AddForce(float delta_t){
 
     glm::vec3 force = this->calculateSpringForce();
 
-    (this->end_vertices[0])->AddForce(-force + damping_force0 + (this->end_vertices[0])->mass * Global::gravity);
-    (this->end_vertices[1])->AddForce( force + damping_force1 + (this->end_vertices[1])->mass * Global::gravity);
+    // (sin(x*y*t), cos(z*t), sin(cos(5*x*y*z))
+    glm::vec3 p1 = this->end_vertices[0]->position;
+    glm::vec3 p2 = this->end_vertices[1]->position;
+
+    float time = glfwGetTime();
+    float wind_strength = 0.03;
+    glm::vec3 wind1 = wind_strength * glm::vec3(sin(p1.x * p1.y * time), cos(p1.z * time), sin(cos(9*p1.x*p1.y*p1.z*time)));
+    glm::vec3 wind2 = wind_strength * glm::vec3(sin(p2.x * p2.y * time), cos(p2.z * time), sin(cos(9*p2.x*p2.y*p2.z*time)));
+    // glm::vec3 wind1 = wind_strength * glm::vec3(sin(p1.x * p1.y + time), cos(p1.z + time), sin(cos(9*p1.x*p1.y*p1.z+time)));
+    // glm::vec3 wind2 = wind_strength * glm::vec3(sin(p2.x * p2.y + time), cos(p2.z + time), sin(cos(9*p2.x*p2.y*p2.z+time)));
+
+    (this->end_vertices[0])->AddForce(-force + damping_force0 + (this->end_vertices[0])->mass * Global::gravity + wind1);
+    (this->end_vertices[1])->AddForce( force + damping_force1 + (this->end_vertices[1])->mass * Global::gravity + wind2);
 }
 

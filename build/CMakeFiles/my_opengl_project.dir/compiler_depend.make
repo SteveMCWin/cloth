@@ -2007,7 +2007,8 @@ CMakeFiles/my_opengl_project.dir/main.cpp.o: ../main.cpp \
   ../cloth_renderer.h \
   ../cloth_handler.h \
   ../spring.h \
-  ../global.h
+  ../global.h \
+  ../camera.h
 
 CMakeFiles/my_opengl_project.dir/spring.cpp.o: ../spring.cpp \
   /usr/include/stdc-predef.h \
@@ -2309,7 +2310,8 @@ CMakeFiles/my_opengl_project.dir/spring.cpp.o: ../spring.cpp \
   /usr/local/include/glm/gtc/matrix_transform.hpp \
   /usr/local/include/glm/gtc/constants.hpp \
   /usr/local/include/glm/gtc/constants.inl \
-  /usr/local/include/glm/gtc/matrix_transform.inl
+  /usr/local/include/glm/gtc/matrix_transform.inl \
+  /usr/include/GLFW/glfw3.h
 
 
 ../spring.cpp:
@@ -2385,6 +2387,8 @@ CMakeFiles/my_opengl_project.dir/spring.cpp.o: ../spring.cpp \
 /usr/include/x86_64-linux-gnu/bits/types/cookie_io_functions_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
+
+../camera.h:
 
 /usr/include/stdio.h:
 
