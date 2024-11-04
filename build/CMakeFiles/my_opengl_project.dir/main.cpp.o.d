@@ -368,4 +368,5 @@ CMakeFiles/my_opengl_project.dir/main.cpp.o: \
  /home/stevica/openGL_projects/cloth/cloth_renderer.h \
  /home/stevica/openGL_projects/cloth/cloth_handler.h \
  /home/stevica/openGL_projects/cloth/spring.h \
- /home/stevica/openGL_projects/cloth/global.h
+ /home/stevica/openGL_projects/cloth/global.h \
+ /home/stevica/openGL_projects/cloth/camera.h

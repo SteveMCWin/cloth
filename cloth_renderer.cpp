@@ -160,10 +160,10 @@ void ClothRenderer::RenderSprings(ClothHandler& cloth, Shader& shader){
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->structuralSpringEBOs[i]);
         glDrawElements(GL_LINE_STRIP, Global::cloth_cols, GL_UNSIGNED_INT, 0);
     }
-    for(int i = 0; i < Global::cloth_cols; i++){
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->structuralSpringEBOs[i+Global::cloth_rows]);
-        glDrawElements(GL_LINE_STRIP, Global::cloth_rows, GL_UNSIGNED_INT, 0);
-    }
+    // for(int i = 0; i < Global::cloth_cols; i++){
+    //     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->structuralSpringEBOs[i+Global::cloth_rows]);
+    //     glDrawElements(GL_LINE_STRIP, Global::cloth_rows, GL_UNSIGNED_INT, 0);
+    // }
     for(int i = 0; i < 2; i++){
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->sheerSpringEBOs[i]);
         glDrawElements(GL_LINES, 2 * (Global::cloth_rows-1) * (Global::cloth_cols-1), GL_UNSIGNED_INT, 0);
@@ -200,13 +200,13 @@ void ClothRenderer::setUpRendering(ClothHandler& cloth, Shader& shader){
     fillVertBuffer(cloth);  // note: very wastefull atm if rendering cloth and springs and points at the same time
 
     glm::mat4 model = glm::mat4(1.0f);
-    glm::mat4 view = glm::mat4(1.0f);
-    glm::mat4 projection = glm::mat4(1.0f);
+    // glm::mat4 view = glm::mat4(1.0f);
+    // glm::mat4 projection = glm::mat4(1.0f);
 
-    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));  // the view matrix will have to be initialized in main if I want camera movement 
+    // view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));  // the view matrix will have to be initialized in main if I want camera movement 
 
     shader.use();
-    shader.setMat4("view", view);
+    // shader.setMat4("view", view);
     shader.setMat4("model", model);
 
     glBindVertexArray(this->vertexVAO);

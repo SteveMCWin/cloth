@@ -10,9 +10,10 @@
 #include "cloth_vertex.h"
 #include "cloth_renderer.h"
 #include "cloth_handler.h"
+#include "camera.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
+// void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void processInput(GLFWwindow* window);
 void printVec3(glm::vec3 vec);
@@ -22,6 +23,11 @@ const unsigned int SCR_HEIGHT   =  900;
 
 float delta_time = 0.0f;
 float last_frame = 0.0f;
+
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+float lastX = SCR_WIDTH / 2.0f;
+float lastY = SCR_HEIGHT / 2.0f;
+bool firstMouse = true;
 
 // bool n_pressed = false;
 // bool n_released = false;
@@ -47,6 +53,7 @@ int main(int, char**){
 
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetCursorPosCallback(window, mouse_callback);
 
     if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
         std::cout << "Failed to initialize GLAD" << std::endl;
@@ -106,6 +113,11 @@ int main(int, char**){
         glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        cloth_vertex_shader.use();
+        cloth_vertex_shader.setMat4("view", camera.GetViewMatrix());
+        spring_shader.use();
+        spring_shader.setMat4("view", camera.GetViewMatrix());
+
         handler.UpdateVertices(delta_time);
         renderer.RenderCloth(handler, cloth_vertex_shader);
         renderer.RenderSprings(handler, spring_shader);
@@ -147,6 +159,33 @@ void processInput(GLFWwindow* window){
     // if(glfwGetKey(window, GLFW_KEY_N) == GLFW_RELEASE){
     //     n_released = true;
     // }
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+        camera.ProcessKeyboard(FORWARD, delta_time);
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+        camera.ProcessKeyboard(BACKWARD, delta_time);
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+        camera.ProcessKeyboard(LEFT, delta_time);
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+        camera.ProcessKeyboard(RIGHT, delta_time);
+}
+
+void mouse_callback(GLFWwindow* window, double xposIn, double yposIn){
+    float xpos = static_cast<float>(xposIn);
+    float ypos = static_cast<float>(yposIn);
+
+    if (firstMouse) {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
+    }
+
+    float xoffset = xpos - lastX;
+    float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+
+    lastX = xpos;
+    lastY = ypos;
+
+    camera.ProcessMouseMovement(xoffset, yoffset);
 }
 
 void printVec3(glm::vec3 vec){
