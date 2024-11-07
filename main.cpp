@@ -78,7 +78,11 @@ int main(int, char**){
                                          "/home/stevica/openGL_projects/cloth/shaders/f_cloth_vertex.glsl");
     Shader spring_shader        = Shader("/home/stevica/openGL_projects/cloth/shaders/v_spring.glsl",
                                          "/home/stevica/openGL_projects/cloth/shaders/f_spring.glsl");
+    Shader cloth_shader         = Shader("/home/stevica/openGL_projects/cloth/shaders/v_cloth.glsl",
+                                         "/home/stevica/openGL_projects/cloth/shaders/f_cloth.glsl");
 
+    cloth_shader.use();
+    cloth_shader.setMat4("projection", Global::projection);
     cloth_vertex_shader.use();
     cloth_vertex_shader.setMat4("projection", Global::projection);
     spring_shader.use();
@@ -97,10 +101,21 @@ int main(int, char**){
         }
     }
 
-    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, 500.0f, Global::subdivision_length);
+    float stretch_factor = 300.0f;
+
+    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, stretch_factor, Global::subdivision_length);
     ClothRenderer renderer;
 
     handler.PinVertices(glm::vec2((float)(Global::cloth_rows-1), 0.0f), glm::vec2((float)(Global::cloth_rows-1), (float)(Global::cloth_cols-1)));
+
+    glm::vec3 lightPos = glm::vec3(1.0f, 4.0f, -2.0f);
+    glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
+    glm::vec3 clothColor = glm::vec3(0.3f, 0.8f, 0.4f);
+
+    cloth_shader.use();
+    cloth_shader.setVec3("lightPos", lightPos);
+    cloth_shader.setVec3("lightColor", lightColor);
+    cloth_shader.setVec3("clothColor", clothColor);
 
     while(!glfwWindowShouldClose(window)){
 
@@ -108,34 +123,23 @@ int main(int, char**){
         delta_time = current_frame - last_frame;
         last_frame = current_frame;
 
-        // std::cout << "dt^2: " << delta_time*delta_time << std::endl;
-
         processInput(window);
 
         glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+        cloth_shader.use();
+        cloth_shader.setMat4("view", camera.GetViewMatrix());
+        cloth_shader.setVec3("viewPos", camera.Position);
         cloth_vertex_shader.use();
         cloth_vertex_shader.setMat4("view", camera.GetViewMatrix());
         spring_shader.use();
         spring_shader.setMat4("view", camera.GetViewMatrix());
 
         handler.UpdateVertices(delta_time);
-        renderer.RenderCloth(handler, cloth_vertex_shader);
-        renderer.RenderSprings(handler, spring_shader);
-
-        // used to step through one frame at a time
-        // while(!n_pressed) processInput(window);
-        // while(!n_released) processInput(window);
-        // n_pressed = false;
-        // n_released = false;
-
-        // for(int i = 0; i < 10; i++){
-        //     for(int j = 0; j < 10; j++){
-        //         printVec3(handler.cloth_vertices[i][j].position);
-        //     }
-        // }
-        // std::cout << std::endl << std::endl;
+        renderer.RenderCloth(handler, cloth_shader);
+        // renderer.RenderSprings(handler, spring_shader);
+        // renderer.RenderVertices(handler, cloth_vertex_shader);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

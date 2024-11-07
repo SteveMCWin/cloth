@@ -19,6 +19,7 @@ private:
 
     void fillVertBuffer(ClothHandler& cloth);   // since cloth vertex positions change every frame, the vbo should get updated as soon as they do
     void setUpRendering(ClothHandler& cloth, Shader& shader);
+    glm::vec3 CalculateVertexNormal(ClothHandler& cloth, int i, int j);
 
     unsigned int vertexVBO;
     unsigned int vertexVAO;

@@ -1,4 +1,5 @@
 #include "cloth_renderer.h"
+#include "cloth_handler.h"
 #include "cloth_vertex.h"
 
 #include <glm/detail/type_mat.hpp>
@@ -88,9 +89,12 @@ ClothRenderer::ClothRenderer(){
     glBindBuffer(GL_ARRAY_BUFFER, this->vertexVBO);
     glBindVertexArray(this->vertexVAO);
 
-    glBufferData(GL_ARRAY_BUFFER, 3 * Global::cloth_rows * Global::cloth_cols * sizeof(float), NULL, GL_DYNAMIC_DRAW);  // just reserve space for the vertex positions in the vbo
+    // reserve space for the vertex positions and normals in the vbo
+    glBufferData(GL_ARRAY_BUFFER, 6 * Global::cloth_rows * Global::cloth_cols * sizeof(float), NULL, GL_DYNAMIC_DRAW);  
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(3 * Global::cloth_rows * Global::cloth_cols * sizeof(float)));
     glEnableVertexAttribArray(0);
+    glEnableVertexAttribArray(1);
 
     for(int i = 0; i < Global::cloth_rows-1; i++){
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vertexEBOs[i]);
@@ -179,17 +183,34 @@ void ClothRenderer::fillVertBuffer(ClothHandler& cloth){
     // objects so the idea is to load all of them into one array
     // so they could be loaded into the vbo at once
     float vertices_positions[3*Global::cloth_rows*Global::cloth_cols];
+    float vertices_normals[3*Global::cloth_rows*Global::cloth_cols];
 
     for(int i = 0; i < Global::cloth_rows; i++){
         for(int j = 0; j < Global::cloth_cols; j++){
-            float vertex[3] = {cloth.cloth_vertices[i][j].position.x, cloth.cloth_vertices[i][j].position.y, cloth.cloth_vertices[i][j].position.z};
-            vertices_positions[3*Global::cloth_cols*i+3*j  ] = vertex[0];
-            vertices_positions[3*Global::cloth_cols*i+3*j+1] = vertex[1];
-            vertices_positions[3*Global::cloth_cols*i+3*j+2] = vertex[2];   // if things don't work, it's probably this
+            // vertex positions
+            float vertex_pos[3] = {cloth.cloth_vertices[i][j].position.x, cloth.cloth_vertices[i][j].position.y, cloth.cloth_vertices[i][j].position.z};
+            vertices_positions[3*Global::cloth_cols*i+3*j  ] = vertex_pos[0];
+            vertices_positions[3*Global::cloth_cols*i+3*j+1] = vertex_pos[1];
+            vertices_positions[3*Global::cloth_cols*i+3*j+2] = vertex_pos[2];   // if things don't work, it's probably this
+            // vertex normals
+            glm::vec3 n = this->CalculateVertexNormal(cloth, i, j);
+            float vertex_normal[3] = {n.x, n.y, n.z};
+            vertices_normals[3*Global::cloth_cols*i+3*j  ] = vertex_normal[0];
+            vertices_normals[3*Global::cloth_cols*i+3*j+1] = vertex_normal[1];
+            vertices_normals[3*Global::cloth_cols*i+3*j+2] = vertex_normal[2];
         }
     }
+    
+    // for(int i = 0; i < Global::cloth_rows; i++){
+    //     for(int j = 0; j < Global::cloth_cols; j++){
+    //         float vertex[3] = {}
+    //     }
+    // }
 
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices_positions), vertices_positions);
+    glBufferSubData(GL_ARRAY_BUFFER, sizeof(vertices_positions), sizeof(vertices_normals), vertices_normals);
+
+
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
@@ -213,4 +234,14 @@ void ClothRenderer::setUpRendering(ClothHandler& cloth, Shader& shader){
 
 }
 
+glm::vec3 ClothRenderer::CalculateVertexNormal(ClothHandler& cloth, int i, int j){
+    
+    int x_dir = (j == Global::cloth_cols-1) ? -1 : 1;
+    int y_dir = (i == Global::cloth_rows-1) ? -1 : 1;
 
+    glm::vec3 v1 = cloth.cloth_vertices[i+y_dir][j].position - cloth.cloth_vertices[i][j].position;
+    glm::vec3 v2 = cloth.cloth_vertices[i][j+y_dir].position - cloth.cloth_vertices[i][j].position;
+    if(x_dir < 0) v1 *= -1.0f;
+    // if(y_dir < 0) v2 *= -1.0f;
+    return glm::normalize(glm::cross(v1, v2));
+}
