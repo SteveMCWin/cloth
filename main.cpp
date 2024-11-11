@@ -95,7 +95,7 @@ int main(int, char**){
     float masses[rows][cols];
 
     for(int i = 0; i < rows; i++){    // Generating position data for each cloth vertex
-        for(int j = 0; j < cols; j++){
+        for(int j = cols-1; j >= 0; j--){
             cloth_vertex_positions[i][j] = glm::vec3(Global::subdivision_length * (j-5), Global::subdivision_length * (i-5), -1.0f);
             masses[i][j] = 0.003f;
         }
@@ -138,7 +138,7 @@ int main(int, char**){
 
         handler.UpdateVertices(delta_time);
         renderer.RenderCloth(handler, cloth_shader);
-        // renderer.RenderSprings(handler, spring_shader);
+        renderer.RenderSprings(handler, spring_shader);
         // renderer.RenderVertices(handler, cloth_vertex_shader);
 
         glfwSwapBuffers(window);
