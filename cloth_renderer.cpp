@@ -245,3 +245,46 @@ glm::vec3 ClothRenderer::CalculateVertexNormal(ClothHandler& cloth, int i, int j
     // if(y_dir < 0) v2 *= -1.0f;
     return glm::normalize(glm::cross(v1, v2));
 }
+
+// glm::vec3 ClothRenderer::CalculateVertexNormal(ClothHandler& cloth, int i, int j){
+//     
+//     glm::vec3 v1;
+//     glm::vec3 v2;
+//
+//     glm::vec3 norm = glm::vec3(0.0f);
+//     int div_counter = 0;
+//
+//     if(i-1 >= 0){
+//         if(j-1 >=0){
+//             v1 = cloth.cloth_vertices[i-1][j].position - cloth.cloth_vertices[i][j].position;
+//             v2 = cloth.cloth_vertices[i][j-1].position - cloth.cloth_vertices[i][j].position;
+//             norm += glm::normalize(glm::cross(v1, v2));
+//             div_counter++;
+//         }
+//         if(j+1 < Global::cloth_cols){
+//             v1 = cloth.cloth_vertices[i-1][j].position - cloth.cloth_vertices[i][j].position;
+//             v2 = cloth.cloth_vertices[i][j+1].position - cloth.cloth_vertices[i][j].position;
+//             norm += glm::normalize(glm::cross(v1, v2));
+//             div_counter++;
+//         }
+//     }
+//     if(i+1 < Global::cloth_rows){
+//         if(j-1 >=0){
+//             v1 = cloth.cloth_vertices[i+1][j].position - cloth.cloth_vertices[i][j].position;
+//             v2 = cloth.cloth_vertices[i][j-1].position - cloth.cloth_vertices[i][j].position;
+//             norm += glm::normalize(glm::cross(v1, v2));
+//             div_counter++;
+//         }
+//         if(j+1 < Global::cloth_cols){
+//             v1 = cloth.cloth_vertices[i+1][j].position - cloth.cloth_vertices[i][j].position;
+//             v2 = cloth.cloth_vertices[i][j+1].position - cloth.cloth_vertices[i][j].position;
+//             norm += glm::normalize(glm::cross(v1, v2));
+//             div_counter++;
+//         }
+//     }
+//
+//     if(div_counter)
+//         norm = norm/static_cast<float>(div_counter);
+//
+//     return norm;
+// }

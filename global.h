@@ -7,15 +7,18 @@
 #include <glm/detail/type_mat.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+
 class Global{
 public:
 
     // static glm::mat4 view;
     static glm::mat4 projection;
     static glm::vec3 gravity;
+    static constexpr float cloth_length = 2.0f;
     static const unsigned int cloth_cols = 20;
     static const unsigned int cloth_rows = 25;
-    static constexpr float subdivision_length = 0.2f;
+    static constexpr float subdivision_length = cloth_length/MIN(cloth_cols,cloth_rows);
 
 };
 

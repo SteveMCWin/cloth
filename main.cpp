@@ -138,7 +138,7 @@ int main(int, char**){
 
         handler.UpdateVertices(delta_time);
         renderer.RenderCloth(handler, cloth_shader);
-        renderer.RenderSprings(handler, spring_shader);
+        // renderer.RenderSprings(handler, spring_shader);
         // renderer.RenderVertices(handler, cloth_vertex_shader);
 
         glfwSwapBuffers(window);
