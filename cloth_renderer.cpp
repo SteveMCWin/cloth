@@ -34,28 +34,14 @@ ClothRenderer::ClothRenderer(){
 
     for(int i = 0; i < Global::cloth_rows; i++){
         for(int j = 0; j < Global::cloth_cols; j++){
-            // this->structuralSpringIndices[i][j] = 10 * i + j;
-            // this->structuralSpringIndices[i+10][j] = i + 10 * j;
             this->horizontalStructuralSpringIndices[i][j] = Global::cloth_cols * i + j;
         }
     }
     for(int i = 0; i < Global::cloth_cols; i++){
         for(int j = 0; j < Global::cloth_rows; j++){
-            // this->structuralSpringIndices[i][j] = 10 * i + j;
-            // this->structuralSpringIndices[i+10][j] = i + 10 * j;
             this->verticalStructuralSpringIndices[i][j] = i + Global::cloth_cols * j;
         }
     }
-    // for(int i = 0; i < Global::cloth_cols; i++){
-    //     for(int j = 0; j < Global::cloth_rows; j++){
-    //         // this->structuralSpringIndices[i][j] = 10 * i + j;
-    //         // this->structuralSpringIndices[i+10][j] = i + 10 * j;
-    //         // this->verticalStructuralSpringIndices[i][j] = i + Global::cloth_rows * j;
-    //         std::cout << this->verticalStructuralSpringIndices[i][j] << "   ";
-    //     }
-    //     std::cout << std::endl;
-    // }
-
 
     int idx = 0;
 
@@ -193,8 +179,9 @@ void ClothRenderer::fillVertBuffer(ClothHandler& cloth){
             vertices_positions[3*Global::cloth_cols*i+3*j+1] = vertex_pos[1];
             vertices_positions[3*Global::cloth_cols*i+3*j+2] = vertex_pos[2];   // if things don't work, it's probably this
             // vertex normals
-            glm::vec3 n = this->CalculateVertexNormal(cloth, i, j);
-            float vertex_normal[3] = {n.x, n.y, n.z};
+            // glm::vec3 n = this->CalculateVertexNormal(cloth, i, j);
+            // float vertex_normal[3] = {n.x, n.y, n.z};
+            float vertex_normal[3] = {cloth.cloth_vertices[i][j].normal.x, cloth.cloth_vertices[i][j].normal.y, cloth.cloth_vertices[i][j].normal.z};
             vertices_normals[3*Global::cloth_cols*i+3*j  ] = vertex_normal[0];
             vertices_normals[3*Global::cloth_cols*i+3*j+1] = vertex_normal[1];
             vertices_normals[3*Global::cloth_cols*i+3*j+2] = vertex_normal[2];

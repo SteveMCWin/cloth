@@ -107,6 +107,71 @@ void ClothHandler::UpdateVertices(float delta_t){
             this->cloth_vertices[i][j].ApplyForce(delta_t);
         }
     }
+
+    UpdateVertexNormals();
+}
+
+void ClothHandler::UpdateVertexNormals(){
+
+    glm::vec3 v1;
+    glm::vec3 v2;
+
+    glm::vec3 normal;
+
+    for(int i = 0; i < Global::cloth_rows; i++){
+        for(int j = 0; j < Global::cloth_cols; j++){
+            // if(i-1 >= 0){
+            //     if(j-1 >=0){
+            //         v1 = this->cloth_vertices[i-1][j].position - this->cloth_vertices[i][j].position;
+            //         v2 = this->cloth_vertices[i][j-1].position - this->cloth_vertices[i][j].position;
+            //         normal = glm::normalize(glm::cross(v1, v2));
+            //         this->cloth_vertices[i][j].normal += normal;
+            //         this->cloth_vertices[i-1][j].normal += normal;
+            //         this->cloth_vertices[i][j-1].normal += normal;
+            //     }
+            //     if(j+1 < Global::cloth_cols){
+            //         v1 = this->cloth_vertices[i-1][j].position - this->cloth_vertices[i][j].position;
+            //         v2 = this->cloth_vertices[i][j+1].position - this->cloth_vertices[i][j].position;
+            //         normal = glm::normalize(glm::cross(v1, v2));
+            //         this->cloth_vertices[i][j].normal += normal;
+            //         this->cloth_vertices[i-1][j].normal += normal;
+            //         this->cloth_vertices[i][j+1].normal += normal;
+            //     }
+            // }
+            if(i+1 < Global::cloth_rows){
+                // if(j-1 >=0){
+                //     v1 = this->cloth_vertices[i+1][j].position - this->cloth_vertices[i][j].position;
+                //     v2 = this->cloth_vertices[i][j-1].position - this->cloth_vertices[i][j].position;
+                //     normal = glm::normalize(glm::cross(v1, v2));
+                //     this->cloth_vertices[i][j].normal += normal;
+                //     this->cloth_vertices[i+1][j].normal += normal;
+                //     this->cloth_vertices[i][j-1].normal += normal;
+                // }
+                if(j+1 < Global::cloth_cols){
+                    v1 = this->cloth_vertices[i+1][j].position - this->cloth_vertices[i][j].position;
+                    v2 = this->cloth_vertices[i][j+1].position - this->cloth_vertices[i][j].position;
+                    normal = glm::normalize(glm::cross(v1, v2));
+                    this->cloth_vertices[i][j].normal += normal;
+                    this->cloth_vertices[i+1][j].normal += normal;
+                    this->cloth_vertices[i][j+1].normal += normal;
+                    // v1 = this->cloth_vertices[i+1][j].position - this->cloth_vertices[i+1][j+1].position;
+                    // v2 = this->cloth_vertices[i][j+1].position - this->cloth_vertices[i+1][j+1].position;
+                    // normal = glm::normalize(glm::cross(v1, v2));
+                    // this->cloth_vertices[i][j].normal += normal;
+                    // this->cloth_vertices[i+1][j].normal += normal;
+                    // this->cloth_vertices[i][j+1].normal += normal;
+                }
+            }
+
+        }
+    }
+
+    for(int i = 0; i < Global::cloth_rows; i++){
+        for(int j = 0; j < Global::cloth_cols; j++){
+            this->cloth_vertices[i][j].normal = glm::normalize(this->cloth_vertices[i][j].normal);
+        }
+    }
+
 }
 
 void ClothHandler::PinVertices(glm::vec2 v1, glm::vec2 v2){

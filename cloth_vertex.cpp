@@ -9,6 +9,7 @@ ClothVertex::ClothVertex(){
     this->previous_position = glm::vec3(0.0f);
     this->is_pinned = false;
     this->force_applied = glm::vec3(0.0f);
+    this->normal = glm::vec3(0.0f);
 
     // this->force_applied = glm::vec3(0.0f, 0.0f, 0.0f);  // change force applied to be 0x -gy 0z when you get global class up and going
     this->mass = 0.005f;
@@ -19,10 +20,12 @@ ClothVertex::ClothVertex(glm::vec3 pos, float m){
 
     this->next_position = pos;
     this->position = pos;
-    this->previous_position = this->position;
+    this->previous_position = pos;
     this->is_pinned = false;
-    this->force_applied = glm::vec3(0.0f);
     this->mass = m;
+
+    this->force_applied = glm::vec3(0.0f);
+    this->normal = glm::vec3(0.0f);
 }
 
 void ClothVertex::ApplyForce(float delta_time){

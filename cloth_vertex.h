@@ -15,6 +15,7 @@ public:
     glm::vec3 position;
     glm::vec3 previous_position;
     glm::vec3 force_applied;
+    glm::vec3 normal;
     float mass;
     bool is_pinned;
 

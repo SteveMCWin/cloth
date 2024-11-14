@@ -27,6 +27,9 @@ public:
     void UpdateVertices(float delta_t);  // i think the idea should be that we update all the vertices seemingly at once, so if one particle of the spring moves the other won't see it instantly 
     void PinVertices(glm::vec2 v1, glm::vec2 v2);
 
+private:
+    void UpdateVertexNormals();
+
 };
 
 #endif // !CLOTH_HANDLER_H
