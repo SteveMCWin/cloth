@@ -41,5 +41,7 @@ void Spring::AddForce(float delta_t){
 
     (this->end_vertices[0])->AddForce(-force + damping_force0 + (this->end_vertices[0])->mass * Global::gravity + wind1);
     (this->end_vertices[1])->AddForce( force + damping_force1 + (this->end_vertices[1])->mass * Global::gravity + wind2);
+    // (this->end_vertices[0])->AddForce(-force + damping_force0 + (this->end_vertices[0])->mass * Global::gravity);
+    // (this->end_vertices[1])->AddForce( force + damping_force1 + (this->end_vertices[1])->mass * Global::gravity);
 }
 
