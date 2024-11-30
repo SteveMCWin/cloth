@@ -141,51 +141,66 @@ void ClothHandler::UpdateVertexNormals(){
 
     glm::vec3 normal;
 
-    for(int i = 0; i < Global::cloth_rows; i++){
-        for(int j = 0; j < Global::cloth_cols; j++){
-            // if(i-1 >= 0){
-            //     if(j-1 >=0){
-            //         v1 = this->cloth_vertices[i-1][j].position - this->cloth_vertices[i][j].position;
-            //         v2 = this->cloth_vertices[i][j-1].position - this->cloth_vertices[i][j].position;
-            //         normal = glm::normalize(glm::cross(v1, v2));
-            //         this->cloth_vertices[i][j].normal += normal;
-            //         this->cloth_vertices[i-1][j].normal += normal;
-            //         this->cloth_vertices[i][j-1].normal += normal;
-            //     }
-            //     if(j+1 < Global::cloth_cols){
-            //         v1 = this->cloth_vertices[i-1][j].position - this->cloth_vertices[i][j].position;
-            //         v2 = this->cloth_vertices[i][j+1].position - this->cloth_vertices[i][j].position;
-            //         normal = glm::normalize(glm::cross(v1, v2));
-            //         this->cloth_vertices[i][j].normal += normal;
-            //         this->cloth_vertices[i-1][j].normal += normal;
-            //         this->cloth_vertices[i][j+1].normal += normal;
-            //     }
-            // }
-            if(i+1 < Global::cloth_rows){
-                // if(j-1 >=0){
-                //     v1 = this->cloth_vertices[i+1][j].position - this->cloth_vertices[i][j].position;
-                //     v2 = this->cloth_vertices[i][j-1].position - this->cloth_vertices[i][j].position;
-                //     normal = glm::normalize(glm::cross(v1, v2));
-                //     this->cloth_vertices[i][j].normal += normal;
-                //     this->cloth_vertices[i+1][j].normal += normal;
-                //     this->cloth_vertices[i][j-1].normal += normal;
-                // }
-                if(j+1 < Global::cloth_cols){
-                    v1 = this->cloth_vertices[i+1][j].position - this->cloth_vertices[i][j].position;
-                    v2 = this->cloth_vertices[i][j+1].position - this->cloth_vertices[i][j].position;
-                    normal = glm::normalize(glm::cross(v1, v2));
-                    this->cloth_vertices[i][j].normal += normal;
-                    this->cloth_vertices[i+1][j].normal += normal;
-                    this->cloth_vertices[i][j+1].normal += normal;
-                    // v1 = this->cloth_vertices[i+1][j].position - this->cloth_vertices[i+1][j+1].position;
-                    // v2 = this->cloth_vertices[i][j+1].position - this->cloth_vertices[i+1][j+1].position;
-                    // normal = glm::normalize(glm::cross(v1, v2));
-                    // this->cloth_vertices[i][j].normal += normal;
-                    // this->cloth_vertices[i+1][j].normal += normal;
-                    // this->cloth_vertices[i][j+1].normal += normal;
-                }
-            }
+    for(int i = 1; i < Global::cloth_rows - 1; i++){
+        for(int j = 1; j < Global::cloth_cols - 1; j++){
 
+            glm::vec3 curr_ver_pos = this->cloth_vertices[i][j].position;
+
+            v1 = this->cloth_vertices[i-1][j].position - curr_ver_pos;
+            v2 = this->cloth_vertices[i-1][j-1].position - curr_ver_pos;
+            normal = glm::normalize(glm::cross(v1, v2));
+            this->cloth_vertices[i][j].normal += normal;
+            this->cloth_vertices[i-1][j].normal += normal;
+            this->cloth_vertices[i-1][j-1].normal += normal;
+
+            v1 = v2;
+            v2 = this->cloth_vertices[i][j-1].position - curr_ver_pos;
+            normal = glm::normalize(glm::cross(v1, v2));
+            this->cloth_vertices[i][j].normal += normal;
+            this->cloth_vertices[i][j-1].normal += normal;
+            this->cloth_vertices[i-1][j-1].normal += normal;
+
+            v1 = v2;
+            v2 = this->cloth_vertices[i+1][j-1].position - curr_ver_pos;
+            normal = glm::normalize(glm::cross(v1, v2));
+            this->cloth_vertices[i][j].normal += normal;
+            this->cloth_vertices[i][j-1].normal += normal;
+            this->cloth_vertices[i+1][j-1].normal += normal;
+
+            v1 = v2;
+            v2 = this->cloth_vertices[i+1][j].position - curr_ver_pos;
+            normal = glm::normalize(glm::cross(v1, v2));
+            this->cloth_vertices[i][j].normal += normal;
+            this->cloth_vertices[i+1][j].normal += normal;
+            this->cloth_vertices[i+1][j-1].normal += normal;
+
+            v1 = v2;
+            v2 = this->cloth_vertices[i+1][j+1].position - curr_ver_pos;
+            normal = glm::normalize(glm::cross(v1, v2));
+            this->cloth_vertices[i][j].normal += normal;
+            this->cloth_vertices[i+1][j].normal += normal;
+            this->cloth_vertices[i+1][j+1].normal += normal;
+
+            v1 = v2;
+            v2 = this->cloth_vertices[i][j+1].position - curr_ver_pos;
+            normal = glm::normalize(glm::cross(v1, v2));
+            this->cloth_vertices[i][j].normal += normal;
+            this->cloth_vertices[i][j+1].normal += normal;
+            this->cloth_vertices[i+1][j+1].normal += normal;
+
+            v1 = v2;
+            v2 = this->cloth_vertices[i-1][j+1].position - curr_ver_pos;
+            normal = glm::normalize(glm::cross(v1, v2));
+            this->cloth_vertices[i][j].normal += normal;
+            this->cloth_vertices[i][j+1].normal += normal;
+            this->cloth_vertices[i-1][j+1].normal += normal;
+
+            v1 = v2;
+            v2 = this->cloth_vertices[i-1][j].position - curr_ver_pos;
+            normal = glm::normalize(glm::cross(v1, v2));
+            this->cloth_vertices[i][j].normal += normal;
+            this->cloth_vertices[i-1][j].normal += normal;
+            this->cloth_vertices[i-1][j+1].normal += normal;
         }
     }
 
