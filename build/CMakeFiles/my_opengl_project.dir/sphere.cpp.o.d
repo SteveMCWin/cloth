@@ -1,5 +1,6 @@
-CMakeFiles/my_opengl_project.dir/main.cpp.o: \
- /home/stevica/openGL_projects/cloth/main.cpp /usr/include/stdc-predef.h \
+CMakeFiles/my_opengl_project.dir/sphere.cpp.o: \
+ /home/stevica/openGL_projects/cloth/sphere.cpp \
+ /usr/include/stdc-predef.h /home/stevica/openGL_projects/cloth/sphere.h \
  /home/stevica/openGL_projects/cloth/glad.h \
  /usr/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
@@ -16,9 +17,7 @@ CMakeFiles/my_opengl_project.dir/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/bits/time64.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
- /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h /usr/include/GL/gl.h \
- /usr/include/GLFW/glfw3.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+ /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h \
  /usr/local/include/glm/detail/type_vec.hpp \
  /usr/local/include/glm/detail/precision.hpp \
  /usr/local/include/glm/detail/setup.hpp /usr/include/c++/11/cassert \
@@ -26,7 +25,9 @@ CMakeFiles/my_opengl_project.dir/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/cpu_defines.h \
  /usr/include/c++/11/pstl/pstl_config.h /usr/include/assert.h \
- /usr/include/c++/11/cstddef /usr/local/include/glm/simd/platform.h \
+ /usr/include/c++/11/cstddef \
+ /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h \
+ /usr/local/include/glm/simd/platform.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/emmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/xmmintrin.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/mmintrin.h \
@@ -272,14 +273,9 @@ CMakeFiles/my_opengl_project.dir/main.cpp.o: \
  /usr/local/include/glm/detail/func_integer.hpp \
  /usr/local/include/glm/detail/func_integer.inl \
  /usr/local/include/glm/detail/func_integer_simd.inl \
- /usr/local/include/glm/simd/integer.h \
- /usr/local/include/glm/gtc/matrix_transform.hpp \
- /usr/local/include/glm/gtc/constants.hpp \
- /usr/local/include/glm/gtc/constants.inl \
- /usr/local/include/glm/gtc/matrix_transform.inl \
- /usr/include/c++/11/iostream /usr/include/c++/11/ostream \
- /usr/include/c++/11/ios /usr/include/c++/11/iosfwd \
- /usr/include/c++/11/bits/stringfwd.h \
+ /usr/local/include/glm/simd/integer.h /usr/include/c++/11/iostream \
+ /usr/include/c++/11/ostream /usr/include/c++/11/ios \
+ /usr/include/c++/11/iosfwd /usr/include/c++/11/bits/stringfwd.h \
  /usr/include/c++/11/bits/memoryfwd.h /usr/include/c++/11/bits/postypes.h \
  /usr/include/c++/11/cwchar /usr/include/wchar.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h \
@@ -357,21 +353,19 @@ CMakeFiles/my_opengl_project.dir/main.cpp.o: \
  /usr/include/c++/11/bits/locale_facets.tcc \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
- /usr/include/c++/11/bits/istream.tcc \
+ /usr/include/c++/11/bits/istream.tcc /usr/include/c++/11/vector \
+ /usr/include/c++/11/bits/stl_uninitialized.h \
+ /usr/include/c++/11/bits/stl_vector.h \
+ /usr/include/c++/11/bits/stl_bvector.h \
+ /usr/include/c++/11/bits/vector.tcc \
+ /home/stevica/openGL_projects/cloth/global.h \
+ /usr/local/include/glm/gtc/matrix_transform.hpp \
+ /usr/local/include/glm/gtc/constants.hpp \
+ /usr/local/include/glm/gtc/constants.inl \
+ /usr/local/include/glm/gtc/matrix_transform.inl \
  /home/stevica/openGL_projects/cloth/shader.h /usr/include/c++/11/fstream \
  /usr/include/c++/11/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
  /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/sstream \
- /usr/include/c++/11/bits/sstream.tcc \
- /home/stevica/openGL_projects/cloth/cloth_vertex.h \
- /home/stevica/openGL_projects/cloth/cloth_renderer.h \
- /home/stevica/openGL_projects/cloth/cloth_handler.h \
- /home/stevica/openGL_projects/cloth/spring.h \
- /home/stevica/openGL_projects/cloth/global.h \
- /home/stevica/openGL_projects/cloth/camera.h \
- /home/stevica/openGL_projects/cloth/sphere.h /usr/include/c++/11/vector \
- /usr/include/c++/11/bits/stl_uninitialized.h \
- /usr/include/c++/11/bits/stl_vector.h \
- /usr/include/c++/11/bits/stl_bvector.h \
- /usr/include/c++/11/bits/vector.tcc
+ /usr/include/c++/11/bits/sstream.tcc

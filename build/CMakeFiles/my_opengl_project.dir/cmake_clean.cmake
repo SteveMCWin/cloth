@@ -11,6 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/my_opengl_project.dir/global.cpp.o.d"
   "CMakeFiles/my_opengl_project.dir/main.cpp.o"
   "CMakeFiles/my_opengl_project.dir/main.cpp.o.d"
+  "CMakeFiles/my_opengl_project.dir/sphere.cpp.o"
+  "CMakeFiles/my_opengl_project.dir/sphere.cpp.o.d"
   "CMakeFiles/my_opengl_project.dir/spring.cpp.o"
   "CMakeFiles/my_opengl_project.dir/spring.cpp.o.d"
   "my_opengl_project"

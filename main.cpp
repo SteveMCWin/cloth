@@ -11,6 +11,7 @@
 #include "cloth_renderer.h"
 #include "cloth_handler.h"
 #include "camera.h"
+#include "sphere.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 // void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -117,6 +118,8 @@ int main(int, char**){
     cloth_shader.setVec3("lightColor", lightColor);
     cloth_shader.setVec3("clothColor", clothColor);
 
+    Sphere s = Sphere(glm::vec3(0.0, 0.0, 0.0), 1.0);
+
     while(!glfwWindowShouldClose(window)){
 
         float current_frame = glfwGetTime();
@@ -140,6 +143,7 @@ int main(int, char**){
         renderer.RenderCloth(handler, cloth_shader);
         // renderer.RenderSprings(handler, spring_shader);
         // renderer.RenderVertices(handler, cloth_vertex_shader);
+        s.RenderSphere(cloth_shader);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
