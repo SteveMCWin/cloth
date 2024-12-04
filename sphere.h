@@ -15,7 +15,8 @@ class Sphere {
 
 public:
 
-    Sphere(glm::vec3 pos, float r);
+     Sphere(glm::vec3 pos, float r);
+    ~Sphere();
     void RenderSphere(Shader &shader);
 
     glm::vec3 position;

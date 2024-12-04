@@ -1,4 +1,5 @@
 #include "sphere.h"
+#include <glm/gtc/matrix_transform.hpp>
 
 Sphere::Sphere(glm::vec3 pos, float r){
     this->position = pos;
@@ -15,16 +16,19 @@ Sphere::Sphere(glm::vec3 pos, float r){
     // this->float_vertex_positions[0] = pos.x;
     // this->float_vertex_positions[1] = pos.y;
     // this->float_vertex_positions[2] = pos.z;
-    this->float_vertex_positions.push_back(pos.x);
-    this->float_vertex_positions.push_back(pos.y+r);
-    this->float_vertex_positions.push_back(pos.z);
+    // this->float_vertex_positions.push_back(pos.x);
+    // this->float_vertex_positions.push_back(pos.y+r);
+    // this->float_vertex_positions.push_back(pos.z);
+    this->float_vertex_positions.push_back(0.0);
+    this->float_vertex_positions.push_back(r);
+    this->float_vertex_positions.push_back(0.0);
 
-    this->float_vertex_normals.push_back(0.0);
-    this->float_vertex_normals.push_back(1.0);
-    this->float_vertex_normals.push_back(0.0);
-    for(float phi = Global::pi/2.0 + delta_phi; phi > -Global::pi/2.0 - delta_phi; phi += delta_phi) {
+    this->float_vertex_normals.push_back(0.0f);
+    this->float_vertex_normals.push_back(1.0f);
+    this->float_vertex_normals.push_back(0.0f);
+
+    for(float phi = Global::pi/2.0 + delta_phi; phi >= -Global::pi/2.0; phi += delta_phi) {
         for(float theta = 0.0; theta < delta_theta * Global::sphere_sector_count; theta += delta_theta) {
-            std::cout << "AAAAAAA" << std::endl;
 
             float x = r * std::cos(phi) * std::cos(theta);
             float y = r * std::sin(phi);
@@ -34,35 +38,34 @@ Sphere::Sphere(glm::vec3 pos, float r){
             this->float_vertex_positions.push_back(y);
             this->float_vertex_positions.push_back(z);
 
-            this->float_vertex_normals.push_back(this->position.x - x);
-            this->float_vertex_normals.push_back(this->position.y - y);
-            this->float_vertex_normals.push_back(this->position.z - z);
-
-            // this->float_vertex_positions[i*Global::sphere_sector_count + j+3] = x;
-            // this->float_vertex_positions[i*Global::sphere_sector_count + j+4] = y;
-            // this->float_vertex_positions[i*Global::sphere_sector_count + j+5] = z;
-            // this->vertex_positions[i][j] = glm::vec3(x, y, z);
-            // this->vertex_normals[i][j] = this->position - glm::vec3(x, y, z);
+            this->float_vertex_normals.push_back(x - this->position.x);
+            this->float_vertex_normals.push_back(y - this->position.y);
+            this->float_vertex_normals.push_back(z - this->position.z);
         }
     }
 
-    this->float_vertex_positions.push_back(pos.x);
-    this->float_vertex_positions.push_back(pos.y-r);
-    this->float_vertex_positions.push_back(pos.z);
+    // this->float_vertex_positions.push_back(pos.x);
+    // this->float_vertex_positions.push_back(pos.y-r);
+    // this->float_vertex_positions.push_back(pos.z);
+    this->float_vertex_positions.push_back(0.0);
+    this->float_vertex_positions.push_back(-r);
+    this->float_vertex_positions.push_back(0.0);
 
-    this->float_vertex_normals.push_back( 0.0);
-    this->float_vertex_normals.push_back(-1.0);
-    this->float_vertex_normals.push_back( 0.0);
+    this->float_vertex_normals.push_back( 0.0f);
+    this->float_vertex_normals.push_back(-1.0f);
+    this->float_vertex_normals.push_back( 0.0f);
+
+    std::cout << "num of elements in float_vertex_positions: " << this->float_vertex_positions.size() << "\nwhich is this many vec3s: " << this->float_vertex_positions.size()/3 << std::endl;
 
     int x = 0;
-    for(float f : this->float_vertex_positions){
-        if(x%3 == 0) std::cout << "<";
-        std::cout << f;
-        if(x%3 != 2) std::cout << ", ";
-        else if(x%3 == 2) std::cout << ">" << "\t";
-        x++;
-        if(x%15 == 0) std::cout <<  std::endl;
-    }
+    // for(float f : this->float_vertex_positions){
+    //     if(x%3 == 0) std::cout << "<";
+    //     std::cout << f;
+    //     if(x%3 != 2) std::cout << ", ";
+    //     else if(x%3 == 2) std::cout << ">" << "\t";
+    //     x++;
+    //     if(x%15 == 0) std::cout <<  std::endl;
+    // }
 
     unsigned int i = 0;
     unsigned int j = 0;
@@ -88,9 +91,9 @@ Sphere::Sphere(glm::vec3 pos, float r){
     //
 
     for(i = 0; i < Global::sphere_stack_count-1; i++){
-        for(j = 1; j < Global::sphere_sector_count+1; j++){
-            this->sphereRowIndices[i][2*j  ] = j + i*Global::sphere_sector_count;
-            this->sphereRowIndices[i][2*j+1] = j + (i + 1) * Global::sphere_sector_count;
+        for(j = 0; j < Global::sphere_sector_count+1; j++){
+            this->sphereRowIndices[i][2*j  ] = (j%Global::sphere_sector_count)+1 + i*Global::sphere_sector_count;
+            this->sphereRowIndices[i][2*j+1] = (j%Global::sphere_sector_count)+1 + (i + 1) * Global::sphere_sector_count;
         }
     }
 
@@ -103,12 +106,10 @@ Sphere::Sphere(glm::vec3 pos, float r){
     glBindBuffer(GL_ARRAY_BUFFER, this->sphereVBO);
     glBindVertexArray(this->sphereVAO);
 
-    this->float_vertex_positions.insert(this->float_vertex_positions.begin(), this->float_vertex_normals.begin(), this->float_vertex_normals.end());
 
-    glBufferData(GL_ARRAY_BUFFER, this->float_vertex_positions.size() * sizeof(float) + this->float_vertex_normals.size() * sizeof(float),
-                 this->float_vertex_positions.data(), GL_STATIC_DRAW);
-    // glBufferSubData(GL_ARRAY_BUFFER, 0, this->float_vertex_positions.size() * sizeof(float), this->float_vertex_positions.data());
-    // glBufferSubData(GL_ARRAY_BUFFER, this->float_vertex_positions.size() * sizeof(float), this->float_vertex_normals.size() * sizeof(float), this->float_vertex_normals.data());
+    glBufferData(GL_ARRAY_BUFFER, this->float_vertex_positions.size() * sizeof(float) + this->float_vertex_normals.size() * sizeof(float), NULL, GL_STATIC_DRAW);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, this->float_vertex_positions.size() * sizeof(float), this->float_vertex_positions.data());
+    glBufferSubData(GL_ARRAY_BUFFER, this->float_vertex_positions.size() * sizeof(float), this->float_vertex_normals.size() * sizeof(float), this->float_vertex_normals.data());
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(this->float_vertex_positions.size() * sizeof(float)));
@@ -132,10 +133,20 @@ Sphere::Sphere(glm::vec3 pos, float r){
 
 }
 
+Sphere::~Sphere(){
+    glDeleteVertexArrays(1, &this->sphereVAO);
+    glDeleteBuffers(1, &this->sphereVBO);
+    glDeleteBuffers(Global::sphere_stack_count-1, this->sphereRowEBOs);
+    glDeleteBuffers(1, &this->sphereTopEBO);
+    glDeleteBuffers(1, &this->sphereBotEBO);
+}
 
 void Sphere::RenderSphere(Shader& shader){
 
-    // render top
+    shader.use();
+    glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, this->position);
+    shader.setMat4("model", model);
 
     glBindVertexArray(this->sphereVAO);
 

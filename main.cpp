@@ -81,11 +81,18 @@ int main(int, char**){
                                          "/home/stevica/openGL_projects/cloth/shaders/f_spring.glsl");
     Shader cloth_shader         = Shader("/home/stevica/openGL_projects/cloth/shaders/v_cloth.glsl",
                                          "/home/stevica/openGL_projects/cloth/shaders/f_cloth.glsl");
+    Shader sphere_shader        = Shader("/home/stevica/openGL_projects/cloth/shaders/v_sphere.glsl",
+                                         "/home/stevica/openGL_projects/cloth/shaders/f_sphere.glsl");
 
     cloth_shader.use();
     cloth_shader.setMat4("projection", Global::projection);
+
+    sphere_shader.use();
+    sphere_shader.setMat4("projection", Global::projection);
+
     cloth_vertex_shader.use();
     cloth_vertex_shader.setMat4("projection", Global::projection);
+
     spring_shader.use();
     spring_shader.setMat4("projection", Global::projection);
 
@@ -105,20 +112,26 @@ int main(int, char**){
     float stretch_factor = 300.0f;
 
     ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, stretch_factor, Global::subdivision_length);
-    ClothRenderer renderer;
+    ClothRenderer *renderer = new ClothRenderer();
 
     handler.PinVertices(glm::vec2((float)(Global::cloth_rows-1), 0.0f), glm::vec2((float)(Global::cloth_rows-1), (float)(Global::cloth_cols-1)));
 
     glm::vec3 lightPos = glm::vec3(1.0f, 4.0f, -2.0f);
     glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
     glm::vec3 clothColor = glm::vec3(0.3f, 0.8f, 0.4f);
+    glm::vec3 sphereColor = glm::vec3(0.8f, 0.2f, 0.3f);
 
     cloth_shader.use();
     cloth_shader.setVec3("lightPos", lightPos);
     cloth_shader.setVec3("lightColor", lightColor);
     cloth_shader.setVec3("clothColor", clothColor);
 
-    Sphere s = Sphere(glm::vec3(0.0, 0.0, 0.0), 1.0);
+    sphere_shader.use();
+    sphere_shader.setVec3("lightPos", lightPos);
+    sphere_shader.setVec3("lightColor", lightColor);
+    sphere_shader.setVec3("sphereColor", sphereColor);
+
+    Sphere *s = new Sphere(glm::vec3(2.0, 0.0, 0.0), 1.0);
 
     while(!glfwWindowShouldClose(window)){
 
@@ -134,20 +147,28 @@ int main(int, char**){
         cloth_shader.use();
         cloth_shader.setMat4("view", camera.GetViewMatrix());
         cloth_shader.setVec3("viewPos", camera.Position);
+
+        sphere_shader.use();
+        sphere_shader.setMat4("view", camera.GetViewMatrix());
+        sphere_shader.setVec3("viewPos", camera.Position);
+
         cloth_vertex_shader.use();
         cloth_vertex_shader.setMat4("view", camera.GetViewMatrix());
         spring_shader.use();
         spring_shader.setMat4("view", camera.GetViewMatrix());
 
         handler.UpdateVertices(delta_time);
-        renderer.RenderCloth(handler, cloth_shader);
+        renderer->RenderCloth(handler, cloth_shader);
         // renderer.RenderSprings(handler, spring_shader);
         // renderer.RenderVertices(handler, cloth_vertex_shader);
-        s.RenderSphere(cloth_shader);
+        s->RenderSphere(sphere_shader);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
+
+    delete renderer;
+    delete s;
 
     glfwTerminate();
     return 0;

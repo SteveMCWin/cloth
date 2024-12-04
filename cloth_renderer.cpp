@@ -113,6 +113,9 @@ ClothRenderer::ClothRenderer(){
 ClothRenderer::~ClothRenderer(){
     glDeleteVertexArrays(1, &this->vertexVAO);
     glDeleteBuffers(1, &this->vertexVBO);
+    glDeleteBuffers(Global::cloth_rows-1, this->vertexEBOs);
+    glDeleteBuffers(Global::cloth_rows + Global::cloth_cols, this->structuralSpringEBOs);
+    glDeleteBuffers(2, this->sheerSpringEBOs);
 }
 
 void ClothRenderer::RenderCloth(ClothHandler& cloth, Shader& shader){
