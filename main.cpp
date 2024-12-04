@@ -131,7 +131,7 @@ int main(int, char**){
     sphere_shader.setVec3("lightColor", lightColor);
     sphere_shader.setVec3("sphereColor", sphereColor);
 
-    Sphere *s = new Sphere(glm::vec3(2.0, 0.0, 0.0), 1.0);
+    Sphere *s = new Sphere(glm::vec3(3.0, 0.0, 0.0), 1.0);
 
     while(!glfwWindowShouldClose(window)){
 

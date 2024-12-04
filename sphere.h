@@ -22,26 +22,14 @@ public:
     glm::vec3 position;
     float radius;
 
-    // glm::vec3 top_vertex_position;
-    // glm::vec3 bot_vertex_position;
-    // glm::vec3 top_normal;
-    // glm::vec3 bot_normal;
-    // glm::vec3 vertex_positions[Global::sphere_stack_count][Global::sphere_sector_count];
-    // glm::vec3 vertex_normals[Global::sphere_stack_count][Global::sphere_sector_count];
+    std::vector<float> vertex_positions;
+    std::vector<float> vertex_normals;
 
-    // float float_vertex_positions[Global::sphere_stack_count * Global::sphere_sector_count * 3 + 6];
-    std::vector<float> float_vertex_positions;
-    std::vector<float> float_vertex_normals;
-
-    unsigned int sphereRowIndices[Global::sphere_stack_count-1][2*Global::sphere_sector_count+2];
-    unsigned int sphereTopIndices[Global::sphere_sector_count+1];
-    unsigned int sphereBotIndices[Global::sphere_sector_count+1];
+    unsigned int sphereRowIndices[Global::sphere_stack_count][2*Global::sphere_sector_count+2];
 
     unsigned int sphereVAO;
     unsigned int sphereVBO;
-    unsigned int sphereRowEBOs[Global::sphere_stack_count-1];
-    unsigned int sphereTopEBO;
-    unsigned int sphereBotEBO;
+    unsigned int sphereRowEBOs[Global::sphere_stack_count];
 };
 
 

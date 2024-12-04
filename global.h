@@ -19,7 +19,7 @@ public:
     static const unsigned int cloth_cols = 20;
     static const unsigned int cloth_rows = 25;
     static const unsigned int sphere_sector_count = 25;
-    static const unsigned int sphere_stack_count = 10;
+    static const unsigned int sphere_stack_count = 15;
     static const float pi;
     static constexpr float subdivision_length = cloth_length/MIN(cloth_cols,cloth_rows);
 
