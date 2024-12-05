@@ -118,7 +118,7 @@ int main(int, char**){
     CollisionHandler collision_handler;
     ClothRenderer *renderer = new ClothRenderer();
 
-    cloth_handler.PinVertices(glm::vec2((float)(Global::cloth_rows-1), 0.0f), glm::vec2((float)(Global::cloth_rows-1), (float)(Global::cloth_cols-1)));
+    // cloth_handler.PinVertices(glm::vec2((float)(Global::cloth_rows-1), 0.0f), glm::vec2((float)(Global::cloth_rows-1), (float)(Global::cloth_cols-1)));
 
     glm::vec3 lightPos = glm::vec3(1.0f, 4.0f, -2.0f);
     glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -163,8 +163,9 @@ int main(int, char**){
         spring_shader.use();
         spring_shader.setMat4("view", camera.GetViewMatrix());
 
-        cloth_handler.UpdateVertices(delta_time);
-        collision_handler.HandleCollision(cloth_handler, spheres);
+        cloth_handler.CalculateVertexNextPos(delta_time);
+        collision_handler.HandleCollision(cloth_handler, spheres, delta_time);
+        cloth_handler.UpdateVertexPositions();
         cloth_handler.UpdateVertexNormals();
 
         renderer->RenderCloth(cloth_handler, cloth_shader);

@@ -26,7 +26,8 @@ public:
     glm::vec3 cloth_position = glm::vec3(0.0f, 0.0f, -2.0f);
 
     ClothHandler(glm::vec3 positions[Global::cloth_rows][Global::cloth_cols], float masses[Global::cloth_rows][Global::cloth_cols], float spring_stiffness, float spring_rest_len, glm::vec3 pos);
-    void UpdateVertices(float delta_t);
+    void CalculateVertexNextPos(float delta_t);
+    void UpdateVertexPositions();
     void UpdateVertexNormals();
     void PinVertices(glm::vec2 v1, glm::vec2 v2);
 

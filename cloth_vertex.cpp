@@ -28,13 +28,16 @@ ClothVertex::ClothVertex(glm::vec3 pos, float m){
     this->normal = glm::vec3(0.0f);
 }
 
-void ClothVertex::ApplyForce(float delta_time){
+void ClothVertex::CalculateNextPos(float delta_time){
 
     if(is_pinned) return;
 
-    glm::vec3 new_pos = 2.0f * this->position - this->previous_position + this->force_applied * delta_time * delta_time;
-    this->previous_position = this->position;   // maybe don't update the positions instantly here but rather make a different function for that
-    this->position = new_pos;
+    this->next_position = 2.0f * this->position - this->previous_position + this->force_applied * delta_time * delta_time;
+}
+
+void ClothVertex::UpdatePos(){
+    this->previous_position = this->position;
+    this->position = this->next_position;
 }
 
 void ClothVertex::AddForce(glm::vec3 force){

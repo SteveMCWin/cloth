@@ -135,11 +135,6 @@ void ClothHandler::CalculateVertexNextPos(float delta_t){
 
 void ClothHandler::UpdateVertexPositions(){
 
-    for(int i = 0; i < Global::cloth_rows; i++){
-        for(int j = 0; j < Global::cloth_cols; j++){
-            this->cloth_vertices[i][j].UpdatePos();
-        }
-    }
 }
 
 void ClothHandler::UpdateVertexNormals(){
