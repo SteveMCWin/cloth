@@ -211,6 +211,7 @@ void ClothRenderer::setUpRendering(ClothHandler& cloth, Shader& shader){
     fillVertBuffer(cloth);  // note: very wastefull atm if rendering cloth and springs and points at the same time
 
     glm::mat4 model = glm::mat4(1.0f);
+    model = glm::translate(model, cloth.cloth_position);
     // glm::mat4 view = glm::mat4(1.0f);
     // glm::mat4 projection = glm::mat4(1.0f);
 

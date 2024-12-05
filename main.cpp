@@ -105,14 +105,14 @@ int main(int, char**){
     for(int i = 0; i < rows; i++){    // Generating position data for each cloth vertex
         for(int j = cols-1; j >= 0; j--){
             // cloth_vertex_positions[i][j] = glm::vec3(Global::subdivision_length * (j-5), Global::subdivision_length * (i-5), -1.0f);
-            cloth_vertex_positions[i][j] = glm::vec3(Global::subdivision_length * (j-5), 1.5f, Global::subdivision_length * (i-5)-4.5f);
+            cloth_vertex_positions[i][j] = glm::vec3(Global::subdivision_length * (j-5), 0.0f, Global::subdivision_length * (i-5)); // not good, use cloth position
             masses[i][j] = 0.008f;
         }
     }
 
     float spring_stiffness = 1000.0f;
 
-    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, spring_stiffness, Global::subdivision_length);
+    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, spring_stiffness, Global::subdivision_length, glm::vec3(0.0, 1.5f, -4.5f));
     ClothRenderer *renderer = new ClothRenderer();
 
     handler.PinVertices(glm::vec2((float)(Global::cloth_rows-1), 0.0f), glm::vec2((float)(Global::cloth_rows-1), (float)(Global::cloth_cols-1)));
@@ -159,6 +159,8 @@ int main(int, char**){
         spring_shader.setMat4("view", camera.GetViewMatrix());
 
         handler.UpdateVertices(delta_time);
+        handler.UpdateVertexNormals();
+        // handle collision
         renderer->RenderCloth(handler, cloth_shader);
         // renderer.RenderSprings(handler, spring_shader);
         // renderer.RenderVertices(handler, cloth_vertex_shader);

@@ -3,7 +3,8 @@
 #include "spring.h"
 
 ClothHandler::ClothHandler(glm::vec3 positions[Global::cloth_rows][Global::cloth_cols], float masses[Global::cloth_rows][Global::cloth_cols],
-                           float spring_stiffness, float spring_rest_len){
+                           float spring_stiffness, float spring_rest_len, glm::vec3 pos){
+    this->cloth_position = pos;
     for(int i = 0; i < Global::cloth_rows; i++){
         for(int j = 0; j < Global::cloth_cols; j++){
             this->cloth_vertices[i][j] = ClothVertex(positions[i][j], masses[i][j]);
@@ -130,8 +131,6 @@ void ClothHandler::UpdateVertices(float delta_t){
             this->cloth_vertices[i][j].ApplyForce(delta_t);
         }
     }
-
-    UpdateVertexNormals();
 }
 
 void ClothHandler::UpdateVertexNormals(){
