@@ -37,13 +37,6 @@ void ClothVertex::ApplyForce(float delta_time){
     this->position = new_pos;
 }
 
-void ClothVertex::operator=(const ClothVertex& v){
-
-    this->position = v.position;
-    this->previous_position = v.previous_position;
-    this->mass = v.mass;
-}
-
 void ClothVertex::AddForce(glm::vec3 force){
     this->force_applied += force;
 }

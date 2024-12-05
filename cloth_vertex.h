@@ -25,7 +25,6 @@ public:
     void ApplyForce(float delta_t);    // calculated using Verlet Integration (i think?)
     void AddForce(glm::vec3 force);
     void ResetForce();
-    void operator=(const ClothVertex& v);
 
 };
 

@@ -39,7 +39,7 @@ int main(int, char**){
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    // glfwWindowHint(GLFW_SAMPLES, 4);
+    glfwWindowHint(GLFW_SAMPLES, 4);
 
     // vblank_mode=0 ./my_opengl_project 
 
@@ -104,14 +104,15 @@ int main(int, char**){
 
     for(int i = 0; i < rows; i++){    // Generating position data for each cloth vertex
         for(int j = cols-1; j >= 0; j--){
-            cloth_vertex_positions[i][j] = glm::vec3(Global::subdivision_length * (j-5), Global::subdivision_length * (i-5), -1.0f);
-            masses[i][j] = 0.003f;
+            // cloth_vertex_positions[i][j] = glm::vec3(Global::subdivision_length * (j-5), Global::subdivision_length * (i-5), -1.0f);
+            cloth_vertex_positions[i][j] = glm::vec3(Global::subdivision_length * (j-5), 1.5f, Global::subdivision_length * (i-5)-4.5f);
+            masses[i][j] = 0.008f;
         }
     }
 
-    float stretch_factor = 300.0f;
+    float spring_stiffness = 1000.0f;
 
-    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, stretch_factor, Global::subdivision_length);
+    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, spring_stiffness, Global::subdivision_length);
     ClothRenderer *renderer = new ClothRenderer();
 
     handler.PinVertices(glm::vec2((float)(Global::cloth_rows-1), 0.0f), glm::vec2((float)(Global::cloth_rows-1), (float)(Global::cloth_cols-1)));
@@ -161,7 +162,7 @@ int main(int, char**){
         renderer->RenderCloth(handler, cloth_shader);
         // renderer.RenderSprings(handler, spring_shader);
         // renderer.RenderVertices(handler, cloth_vertex_shader);
-        s->RenderSphere(sphere_shader);
+        // s->RenderSphere(sphere_shader);
 
         glfwSwapBuffers(window);
         glfwPollEvents();

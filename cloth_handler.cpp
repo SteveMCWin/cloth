@@ -35,7 +35,7 @@ ClothHandler::ClothHandler(glm::vec3 positions[Global::cloth_rows][Global::cloth
 
     for(int i = 0; i < Global::cloth_rows; i++){
         for(int j = 0; j < Global::cloth_cols-3; j++){
-            horizontal_bend_springs[i][j] = Spring(3 * spring_stiffness, 3 * spring_rest_len, &this->cloth_vertices[i][j], &this->cloth_vertices[i][j+3]);
+            horizontal_bend_springs[i][j] = Spring(0.1 * spring_stiffness, 3 * spring_rest_len, &this->cloth_vertices[i][j], &this->cloth_vertices[i][j+3]);
         }
     }
 
@@ -63,7 +63,7 @@ ClothHandler::ClothHandler(glm::vec3 positions[Global::cloth_rows][Global::cloth
 
     for(int i = 0; i < Global::cloth_rows-3; i++){
         for(int j = 0; j < Global::cloth_cols; j++){
-            vertical_bend_springs[i][j] = Spring(3 * spring_stiffness, 3 * spring_rest_len, &this->cloth_vertices[i][j], &this->cloth_vertices[i+3][j]);
+            vertical_bend_springs[i][j] = Spring(0.1 * spring_stiffness, 3 * spring_rest_len, &this->cloth_vertices[i][j], &this->cloth_vertices[i+3][j]);
         }
     }
     // v00 v11
@@ -100,11 +100,11 @@ void ClothHandler::UpdateVertices(float delta_t){
         }
     }
 
-    // for(int i = 0; i < Global::cloth_rows; i++){
-    //     for(int j = 0; j < Global::cloth_cols-3; j++){
-    //         this->horizontal_bend_springs[i][j].AddForce(delta_t);
-    //     }
-    // }
+    for(int i = 0; i < Global::cloth_rows; i++){
+        for(int j = 0; j < Global::cloth_cols-3; j++){
+            this->horizontal_bend_springs[i][j].AddForce(delta_t);
+        }
+    }
 
     for(int i = 0; i < Global::cloth_rows-1; i++){
         for(int j = 0; j < Global::cloth_cols; j++){
@@ -112,11 +112,11 @@ void ClothHandler::UpdateVertices(float delta_t){
         }
     }
 
-    // for(int i = 0; i < Global::cloth_rows-3; i++){
-    //     for(int j = 0; j < Global::cloth_cols; j++){
-    //         this->vertical_bend_springs[i][j].AddForce(delta_t);
-    //     }
-    // }
+    for(int i = 0; i < Global::cloth_rows-3; i++){
+        for(int j = 0; j < Global::cloth_cols; j++){
+            this->vertical_bend_springs[i][j].AddForce(delta_t);
+        }
+    }
 
     for(int i = 0; i < Global::cloth_rows-1; i++){
         for(int j = 0; j < Global::cloth_cols-1; j++){
