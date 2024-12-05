@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/my_opengl_project.dir/cloth_renderer.cpp.o.d"
   "CMakeFiles/my_opengl_project.dir/cloth_vertex.cpp.o"
   "CMakeFiles/my_opengl_project.dir/cloth_vertex.cpp.o.d"
+  "CMakeFiles/my_opengl_project.dir/collision_handler.cpp.o"
+  "CMakeFiles/my_opengl_project.dir/collision_handler.cpp.o.d"
   "CMakeFiles/my_opengl_project.dir/glad.c.o"
   "CMakeFiles/my_opengl_project.dir/glad.c.o.d"
   "CMakeFiles/my_opengl_project.dir/global.cpp.o"

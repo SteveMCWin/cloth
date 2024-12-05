@@ -1,5 +1,6 @@
-CMakeFiles/my_opengl_project.dir/main.cpp.o: \
- /home/stevica/openGL_projects/cloth/main.cpp /usr/include/stdc-predef.h \
+CMakeFiles/my_opengl_project.dir/collision_handler.cpp.o: \
+ /home/stevica/openGL_projects/cloth/collision_handler.cpp \
+ /usr/include/stdc-predef.h \
  /home/stevica/openGL_projects/cloth/collision_handler.h \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_algobase.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
@@ -373,7 +374,4 @@ CMakeFiles/my_opengl_project.dir/main.cpp.o: \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
  /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/sstream \
- /usr/include/c++/11/bits/sstream.tcc /usr/include/GL/gl.h \
- /usr/include/GLFW/glfw3.h \
- /home/stevica/openGL_projects/cloth/cloth_renderer.h \
- /home/stevica/openGL_projects/cloth/camera.h
+ /usr/include/c++/11/bits/sstream.tcc

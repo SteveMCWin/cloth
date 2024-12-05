@@ -1,3 +1,4 @@
+#include "collision_handler.h"
 #include "glad.h"
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
@@ -5,6 +6,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
+#include <vector>
 
 #include "shader.h"
 #include "cloth_vertex.h"
@@ -112,10 +114,11 @@ int main(int, char**){
 
     float spring_stiffness = 1000.0f;
 
-    ClothHandler handler = ClothHandler(cloth_vertex_positions, masses, spring_stiffness, Global::subdivision_length, glm::vec3(0.0, 1.5f, -4.5f));
+    ClothHandler cloth_handler = ClothHandler(cloth_vertex_positions, masses, spring_stiffness, Global::subdivision_length, glm::vec3(0.0, 1.5f, -4.5f));
+    CollisionHandler collision_handler;
     ClothRenderer *renderer = new ClothRenderer();
 
-    handler.PinVertices(glm::vec2((float)(Global::cloth_rows-1), 0.0f), glm::vec2((float)(Global::cloth_rows-1), (float)(Global::cloth_cols-1)));
+    cloth_handler.PinVertices(glm::vec2((float)(Global::cloth_rows-1), 0.0f), glm::vec2((float)(Global::cloth_rows-1), (float)(Global::cloth_cols-1)));
 
     glm::vec3 lightPos = glm::vec3(1.0f, 4.0f, -2.0f);
     glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -132,7 +135,9 @@ int main(int, char**){
     sphere_shader.setVec3("lightColor", lightColor);
     sphere_shader.setVec3("sphereColor", sphereColor);
 
-    Sphere *s = new Sphere(glm::vec3(3.0, 0.0, 0.0), 1.0);
+    Sphere *s1 = new Sphere(glm::vec3(0.0, -1.0, -3.0), 0.5);
+    std::vector<Sphere*> spheres;
+    spheres.push_back(s1);
 
     while(!glfwWindowShouldClose(window)){
 
@@ -158,20 +163,25 @@ int main(int, char**){
         spring_shader.use();
         spring_shader.setMat4("view", camera.GetViewMatrix());
 
-        handler.UpdateVertices(delta_time);
-        handler.UpdateVertexNormals();
-        // handle collision
-        renderer->RenderCloth(handler, cloth_shader);
+        cloth_handler.UpdateVertices(delta_time);
+        collision_handler.HandleCollision(cloth_handler, spheres);
+        cloth_handler.UpdateVertexNormals();
+
+        renderer->RenderCloth(cloth_handler, cloth_shader);
         // renderer.RenderSprings(handler, spring_shader);
         // renderer.RenderVertices(handler, cloth_vertex_shader);
-        // s->RenderSphere(sphere_shader);
+        for(Sphere* s : spheres){
+            s->RenderSphere(sphere_shader);
+        }
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
 
     delete renderer;
-    delete s;
+    for(Sphere* s : spheres){
+        delete s;
+    }
 
     glfwTerminate();
     return 0;

@@ -201,6 +201,30 @@ cloth_vertex.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/cloth_vertex.cpp.s
 .PHONY : cloth_vertex.cpp.s
 
+collision_handler.o: collision_handler.cpp.o
+.PHONY : collision_handler.o
+
+# target to build an object file
+collision_handler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/collision_handler.cpp.o
+.PHONY : collision_handler.cpp.o
+
+collision_handler.i: collision_handler.cpp.i
+.PHONY : collision_handler.i
+
+# target to preprocess a source file
+collision_handler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/collision_handler.cpp.i
+.PHONY : collision_handler.cpp.i
+
+collision_handler.s: collision_handler.cpp.s
+.PHONY : collision_handler.s
+
+# target to generate assembly for a file
+collision_handler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/collision_handler.cpp.s
+.PHONY : collision_handler.cpp.s
+
 glad.o: glad.c.o
 .PHONY : glad.o
 
@@ -339,6 +363,9 @@ help:
 	@echo "... cloth_vertex.o"
 	@echo "... cloth_vertex.i"
 	@echo "... cloth_vertex.s"
+	@echo "... collision_handler.o"
+	@echo "... collision_handler.i"
+	@echo "... collision_handler.s"
 	@echo "... glad.o"
 	@echo "... glad.i"
 	@echo "... glad.s"

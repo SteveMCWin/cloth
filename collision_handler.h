@@ -10,7 +10,7 @@ class CollisionHandler {
 
 public:
     // CollisionHandler();
-    void HandleCollision(ClothHandler &c, std::vector<Sphere> &s);
+    void HandleCollision(ClothHandler &c, std::vector<Sphere*> s);
 };
 
 #endif // !COLLISION_HANDLER_H

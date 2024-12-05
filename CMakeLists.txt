@@ -21,7 +21,8 @@ add_executable(my_opengl_project
     spring.cpp
     cloth_handler.cpp
     global.cpp
-    sphere.cpp)
+    sphere.cpp
+    collision_handler.cpp)
 
 include_directories(/urs/include/freetype2 -I/usr/local/include/freetype2 -I/usr/include/libpng16)
 

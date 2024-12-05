@@ -38,5 +38,10 @@
   "directory": "/home/stevica/openGL_projects/cloth/build",
   "command": "/usr/bin/c++  -I/urs/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/local/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/include/libpng16  -o CMakeFiles/my_opengl_project.dir/sphere.cpp.o -c /home/stevica/openGL_projects/cloth/sphere.cpp",
   "file": "/home/stevica/openGL_projects/cloth/sphere.cpp"
+},
+{
+  "directory": "/home/stevica/openGL_projects/cloth/build",
+  "command": "/usr/bin/c++  -I/urs/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/local/include/freetype2 -I/home/stevica/openGL_projects/cloth/-I/usr/include/libpng16  -o CMakeFiles/my_opengl_project.dir/collision_handler.cpp.o -c /home/stevica/openGL_projects/cloth/collision_handler.cpp",
+  "file": "/home/stevica/openGL_projects/cloth/collision_handler.cpp"
 }
 ]
