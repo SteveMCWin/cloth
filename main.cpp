@@ -1,5 +1,4 @@
-#include "collision_handler.h"
-#include "glad.h"
+#include <glad.h>
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
 #include <glm/detail/type_vec.hpp>
@@ -9,11 +8,11 @@
 #include <vector>
 
 #include "shader.h"
-#include "cloth_vertex.h"
 #include "cloth_renderer.h"
 #include "cloth_handler.h"
 #include "camera.h"
 #include "sphere.h"
+#include "collision_handler.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 // void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
@@ -32,9 +31,6 @@ float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
 
-// bool n_pressed = false;
-// bool n_released = false;
-
 int main(int, char**){
 
     glfwInit();
@@ -42,8 +38,6 @@ int main(int, char**){
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_SAMPLES, 4);
-
-    // vblank_mode=0 ./my_opengl_project 
 
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 
@@ -59,6 +53,7 @@ int main(int, char**){
     glfwSetCursorPosCallback(window, mouse_callback);
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    // glfwSwapInterval(0);
 
     if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
         std::cout << "Failed to initialize GLAD" << std::endl;
@@ -139,11 +134,18 @@ int main(int, char**){
     std::vector<Sphere*> spheres;
     spheres.push_back(s1);
 
+    int counter = 0;
+
     while(!glfwWindowShouldClose(window)){
 
         float current_frame = glfwGetTime();
         delta_time = current_frame - last_frame;
         last_frame = current_frame;
+
+        if(counter++ > 100){
+            std::cout << "FPS: " << 1.0/delta_time << std::endl;
+            counter = 0;
+        }
 
         processInput(window);
 

@@ -15,7 +15,7 @@ find_package(Freetype REQUIRED)
 
 add_executable(my_opengl_project 
     main.cpp
-    glad.c
+    include/glad.c
     cloth_vertex.cpp
     cloth_renderer.cpp
     spring.cpp
@@ -27,3 +27,5 @@ add_executable(my_opengl_project
 include_directories(/urs/include/freetype2 -I/usr/local/include/freetype2 -I/usr/include/libpng16)
 
 target_link_libraries(my_opengl_project glfw OpenGL::GL freetype)
+target_include_directories(my_opengl_project PRIVATE "${CMAKE_SOURCE_DIR}/include")
+

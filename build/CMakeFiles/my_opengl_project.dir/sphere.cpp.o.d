@@ -1,7 +1,7 @@
 CMakeFiles/my_opengl_project.dir/sphere.cpp.o: \
  /home/stevica/openGL_projects/cloth/sphere.cpp \
  /usr/include/stdc-predef.h /home/stevica/openGL_projects/cloth/sphere.h \
- /home/stevica/openGL_projects/cloth/glad.h \
+ /home/stevica/openGL_projects/cloth/include/glad.h \
  /usr/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \

@@ -225,30 +225,6 @@ collision_handler.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/collision_handler.cpp.s
 .PHONY : collision_handler.cpp.s
 
-glad.o: glad.c.o
-.PHONY : glad.o
-
-# target to build an object file
-glad.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/glad.c.o
-.PHONY : glad.c.o
-
-glad.i: glad.c.i
-.PHONY : glad.i
-
-# target to preprocess a source file
-glad.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/glad.c.i
-.PHONY : glad.c.i
-
-glad.s: glad.c.s
-.PHONY : glad.s
-
-# target to generate assembly for a file
-glad.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/glad.c.s
-.PHONY : glad.c.s
-
 global.o: global.cpp.o
 .PHONY : global.o
 
@@ -272,6 +248,30 @@ global.s: global.cpp.s
 global.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/global.cpp.s
 .PHONY : global.cpp.s
+
+include/glad.o: include/glad.c.o
+.PHONY : include/glad.o
+
+# target to build an object file
+include/glad.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/include/glad.c.o
+.PHONY : include/glad.c.o
+
+include/glad.i: include/glad.c.i
+.PHONY : include/glad.i
+
+# target to preprocess a source file
+include/glad.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/include/glad.c.i
+.PHONY : include/glad.c.i
+
+include/glad.s: include/glad.c.s
+.PHONY : include/glad.s
+
+# target to generate assembly for a file
+include/glad.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_opengl_project.dir/build.make CMakeFiles/my_opengl_project.dir/include/glad.c.s
+.PHONY : include/glad.c.s
 
 main.o: main.cpp.o
 .PHONY : main.o
@@ -366,12 +366,12 @@ help:
 	@echo "... collision_handler.o"
 	@echo "... collision_handler.i"
 	@echo "... collision_handler.s"
-	@echo "... glad.o"
-	@echo "... glad.i"
-	@echo "... glad.s"
 	@echo "... global.o"
 	@echo "... global.i"
 	@echo "... global.s"
+	@echo "... include/glad.o"
+	@echo "... include/glad.i"
+	@echo "... include/glad.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

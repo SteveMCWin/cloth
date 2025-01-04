@@ -83,19 +83,19 @@ CMakeFiles/my_opengl_project.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/my_opengl_project.dir/main.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/stevica/openGL_projects/cloth/main.cpp -o CMakeFiles/my_opengl_project.dir/main.cpp.s
 
-CMakeFiles/my_opengl_project.dir/glad.c.o: CMakeFiles/my_opengl_project.dir/flags.make
-CMakeFiles/my_opengl_project.dir/glad.c.o: ../glad.c
-CMakeFiles/my_opengl_project.dir/glad.c.o: CMakeFiles/my_opengl_project.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stevica/openGL_projects/cloth/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/my_opengl_project.dir/glad.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/my_opengl_project.dir/glad.c.o -MF CMakeFiles/my_opengl_project.dir/glad.c.o.d -o CMakeFiles/my_opengl_project.dir/glad.c.o -c /home/stevica/openGL_projects/cloth/glad.c
+CMakeFiles/my_opengl_project.dir/include/glad.c.o: CMakeFiles/my_opengl_project.dir/flags.make
+CMakeFiles/my_opengl_project.dir/include/glad.c.o: ../include/glad.c
+CMakeFiles/my_opengl_project.dir/include/glad.c.o: CMakeFiles/my_opengl_project.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/stevica/openGL_projects/cloth/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/my_opengl_project.dir/include/glad.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/my_opengl_project.dir/include/glad.c.o -MF CMakeFiles/my_opengl_project.dir/include/glad.c.o.d -o CMakeFiles/my_opengl_project.dir/include/glad.c.o -c /home/stevica/openGL_projects/cloth/include/glad.c
 
-CMakeFiles/my_opengl_project.dir/glad.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/my_opengl_project.dir/glad.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/stevica/openGL_projects/cloth/glad.c > CMakeFiles/my_opengl_project.dir/glad.c.i
+CMakeFiles/my_opengl_project.dir/include/glad.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/my_opengl_project.dir/include/glad.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/stevica/openGL_projects/cloth/include/glad.c > CMakeFiles/my_opengl_project.dir/include/glad.c.i
 
-CMakeFiles/my_opengl_project.dir/glad.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/my_opengl_project.dir/glad.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/stevica/openGL_projects/cloth/glad.c -o CMakeFiles/my_opengl_project.dir/glad.c.s
+CMakeFiles/my_opengl_project.dir/include/glad.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/my_opengl_project.dir/include/glad.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/stevica/openGL_projects/cloth/include/glad.c -o CMakeFiles/my_opengl_project.dir/include/glad.c.s
 
 CMakeFiles/my_opengl_project.dir/cloth_vertex.cpp.o: CMakeFiles/my_opengl_project.dir/flags.make
 CMakeFiles/my_opengl_project.dir/cloth_vertex.cpp.o: ../cloth_vertex.cpp
@@ -198,7 +198,7 @@ CMakeFiles/my_opengl_project.dir/collision_handler.cpp.s: cmake_force
 # Object files for target my_opengl_project
 my_opengl_project_OBJECTS = \
 "CMakeFiles/my_opengl_project.dir/main.cpp.o" \
-"CMakeFiles/my_opengl_project.dir/glad.c.o" \
+"CMakeFiles/my_opengl_project.dir/include/glad.c.o" \
 "CMakeFiles/my_opengl_project.dir/cloth_vertex.cpp.o" \
 "CMakeFiles/my_opengl_project.dir/cloth_renderer.cpp.o" \
 "CMakeFiles/my_opengl_project.dir/spring.cpp.o" \
@@ -211,7 +211,7 @@ my_opengl_project_OBJECTS = \
 my_opengl_project_EXTERNAL_OBJECTS =
 
 my_opengl_project: CMakeFiles/my_opengl_project.dir/main.cpp.o
-my_opengl_project: CMakeFiles/my_opengl_project.dir/glad.c.o
+my_opengl_project: CMakeFiles/my_opengl_project.dir/include/glad.c.o
 my_opengl_project: CMakeFiles/my_opengl_project.dir/cloth_vertex.cpp.o
 my_opengl_project: CMakeFiles/my_opengl_project.dir/cloth_renderer.cpp.o
 my_opengl_project: CMakeFiles/my_opengl_project.dir/spring.cpp.o
