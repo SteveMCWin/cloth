@@ -1,7 +1,7 @@
 #ifndef CLOTH_VERTEX_H
 #define CLOTH_VERTEX_H
 
-#include "glad.h"
+#include <glad/glad.h>
 #include <glm/detail/type_vec.hpp>
 #include <glm/glm.hpp>
 

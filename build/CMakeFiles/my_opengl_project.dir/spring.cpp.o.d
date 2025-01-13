@@ -272,8 +272,7 @@ CMakeFiles/my_opengl_project.dir/spring.cpp.o: \
  /usr/local/include/glm/detail/func_integer_simd.inl \
  /usr/local/include/glm/simd/integer.h \
  /home/stevica/openGL_projects/cloth/cloth_vertex.h \
- /home/stevica/openGL_projects/cloth/include/glad.h \
- /usr/include/KHR/khrplatform.h \
+ /usr/include/glad/glad.h /usr/include/KHR/khrplatform.h \
  /home/stevica/openGL_projects/cloth/global.h \
  /usr/local/include/glm/gtc/matrix_transform.hpp \
  /usr/local/include/glm/gtc/constants.hpp \

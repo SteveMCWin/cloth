@@ -1,4 +1,4 @@
-#include <glad.h>
+#include <glad/glad.h>
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
 #include <glm/detail/type_vec.hpp>
@@ -6,8 +6,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <iostream>
 #include <vector>
+#include <GL/glext.h>
 
 #include "shader.h"
+#include "compute_shader.h"
 #include "cloth_renderer.h"
 #include "cloth_handler.h"
 #include "camera.h"
@@ -19,6 +21,8 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void processInput(GLFWwindow* window);
 void printVec3(glm::vec3 vec);
+void standardScene(GLFWwindow* window);
+void computeTest(GLFWwindow* window);
 
 const unsigned int SCR_WIDTH    = 1600;
 const unsigned int SCR_HEIGHT   =  900;
@@ -71,6 +75,13 @@ int main(int, char**){
 
     // glEnable(GL_MULTISAMPLE);
 
+    computeTest(window);
+
+    glfwTerminate();
+    return 0;
+}
+
+void standardScene(GLFWwindow* window){
 
     Shader cloth_vertex_shader  = Shader("/home/stevica/openGL_projects/cloth/shaders/v_cloth_vertex.glsl",
                                          "/home/stevica/openGL_projects/cloth/shaders/f_cloth_vertex.glsl");
@@ -186,11 +197,83 @@ int main(int, char**){
         delete s;
     }
 
-    glfwTerminate();
-    return 0;
 }
 
+void computeTest(GLFWwindow* window){
 
+    Shader cloth_vertex_shader  = Shader("/home/stevica/openGL_projects/cloth/shaders/v_cloth_vertex.glsl",
+                                         "/home/stevica/openGL_projects/cloth/shaders/f_cloth_vertex.glsl");
+    Shader spring_shader        = Shader("/home/stevica/openGL_projects/cloth/shaders/v_spring.glsl",
+                                         "/home/stevica/openGL_projects/cloth/shaders/f_spring.glsl");
+    Shader cloth_shader         = Shader("/home/stevica/openGL_projects/cloth/shaders/v_cloth.glsl",
+                                         "/home/stevica/openGL_projects/cloth/shaders/f_cloth.glsl");
+    Shader sphere_shader        = Shader("/home/stevica/openGL_projects/cloth/shaders/v_sphere.glsl",
+                                         "/home/stevica/openGL_projects/cloth/shaders/f_sphere.glsl");
+    ComputeShader compute_test  = ComputeShader("/home/stevica/openGL_projects/cloth/shaders/c_test.glsl");
+
+    cloth_shader.use();
+    cloth_shader.setMat4("projection", Global::projection);
+
+    sphere_shader.use();
+    sphere_shader.setMat4("projection", Global::projection);
+
+    cloth_vertex_shader.use();
+    cloth_vertex_shader.setMat4("projection", Global::projection);
+
+    spring_shader.use();
+    spring_shader.setMat4("projection", Global::projection);
+
+    glm::vec3 lightPos = glm::vec3(1.0f, 4.0f, -2.0f);
+    glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
+    glm::vec3 clothColor = glm::vec3(0.3f, 0.8f, 0.4f);
+    glm::vec3 sphereColor = glm::vec3(0.8f, 0.2f, 0.3f);
+
+    cloth_shader.use();
+    cloth_shader.setVec3("lightPos", lightPos);
+    cloth_shader.setVec3("lightColor", lightColor);
+    cloth_shader.setVec3("clothColor", clothColor);
+
+    sphere_shader.use();
+    sphere_shader.setVec3("lightPos", lightPos);
+    sphere_shader.setVec3("lightColor", lightColor);
+    sphere_shader.setVec3("sphereColor", sphereColor);
+
+    float test_arr[SCR_HEIGHT][SCR_WIDTH];
+
+    unsigned int ssbo;
+    glGenBuffers(1, &ssbo);
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
+    glBufferData(GL_SHADER_STORAGE_BUFFER, sizeof(test_arr), NULL, GL_DYNAMIC_READ);
+
+    while(!glfwWindowShouldClose(window)){
+
+        float current_frame = glfwGetTime();
+        delta_time = current_frame - last_frame;
+        last_frame = current_frame;
+
+        processInput(window);
+
+        glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        cloth_shader.use();
+        cloth_shader.setMat4("view", camera.GetViewMatrix());
+        cloth_shader.setVec3("viewPos", camera.Position);
+
+        sphere_shader.use();
+        sphere_shader.setMat4("view", camera.GetViewMatrix());
+        sphere_shader.setVec3("viewPos", camera.Position);
+
+        cloth_vertex_shader.use();
+        cloth_vertex_shader.setMat4("view", camera.GetViewMatrix());
+        spring_shader.use();
+        spring_shader.setMat4("view", camera.GetViewMatrix());
+
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+    }
+
+}
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height){
     glViewport(0, 0, width, height);

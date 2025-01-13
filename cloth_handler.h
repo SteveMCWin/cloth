@@ -1,7 +1,7 @@
 #ifndef CLOTH_HANDLER_H
 #define CLOTH_HANDLER_H
 
-#include "glad.h"
+#include <glad/glad.h>
 #include <glm/detail/type_vec.hpp>
 #include <glm/glm.hpp>
 #include <iostream>

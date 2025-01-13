@@ -2,8 +2,7 @@ CMakeFiles/my_opengl_project.dir/cloth_vertex.cpp.o: \
  /home/stevica/openGL_projects/cloth/cloth_vertex.cpp \
  /usr/include/stdc-predef.h \
  /home/stevica/openGL_projects/cloth/cloth_vertex.h \
- /home/stevica/openGL_projects/cloth/include/glad.h \
- /usr/include/KHR/khrplatform.h \
+ /usr/include/glad/glad.h /usr/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \

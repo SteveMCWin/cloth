@@ -1,7 +1,6 @@
 CMakeFiles/my_opengl_project.dir/main.cpp.o: \
  /home/stevica/openGL_projects/cloth/main.cpp /usr/include/stdc-predef.h \
- /home/stevica/openGL_projects/cloth/include/glad.h \
- /usr/include/KHR/khrplatform.h \
+ /usr/include/glad/glad.h /usr/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -361,13 +360,14 @@ CMakeFiles/my_opengl_project.dir/main.cpp.o: \
  /usr/include/c++/11/bits/stl_uninitialized.h \
  /usr/include/c++/11/bits/stl_vector.h \
  /usr/include/c++/11/bits/stl_bvector.h \
- /usr/include/c++/11/bits/vector.tcc \
+ /usr/include/c++/11/bits/vector.tcc /usr/include/GL/glext.h \
  /home/stevica/openGL_projects/cloth/shader.h /usr/include/c++/11/fstream \
  /usr/include/c++/11/bits/codecvt.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
  /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/sstream \
  /usr/include/c++/11/bits/sstream.tcc \
+ /home/stevica/openGL_projects/cloth/compute_shader.h \
  /home/stevica/openGL_projects/cloth/cloth_renderer.h \
  /home/stevica/openGL_projects/cloth/cloth_handler.h \
  /home/stevica/openGL_projects/cloth/cloth_vertex.h \

@@ -45,8 +45,7 @@ CMakeFiles/my_opengl_project.dir/collision_handler.cpp.o: \
  /usr/include/c++/11/bits/range_access.h \
  /usr/include/c++/11/bits/vector.tcc \
  /home/stevica/openGL_projects/cloth/cloth_handler.h \
- /home/stevica/openGL_projects/cloth/include/glad.h \
- /usr/include/KHR/khrplatform.h \
+ /usr/include/glad/glad.h /usr/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \

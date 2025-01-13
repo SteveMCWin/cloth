@@ -36,7 +36,7 @@ ClothHandler::ClothHandler(glm::vec3 positions[Global::cloth_rows][Global::cloth
 
     for(int i = 0; i < Global::cloth_rows; i++){
         for(int j = 0; j < Global::cloth_cols-3; j++){
-            horizontal_bend_springs[i][j] = Spring(0.1 * spring_stiffness, 3 * spring_rest_len, &this->cloth_vertices[i][j], &this->cloth_vertices[i][j+3]);
+            horizontal_bend_springs[i][j] = Spring(0.05 * spring_stiffness, 3 * spring_rest_len, &this->cloth_vertices[i][j], &this->cloth_vertices[i][j+3]);
         }
     }
 
@@ -64,7 +64,7 @@ ClothHandler::ClothHandler(glm::vec3 positions[Global::cloth_rows][Global::cloth
 
     for(int i = 0; i < Global::cloth_rows-3; i++){
         for(int j = 0; j < Global::cloth_cols; j++){
-            vertical_bend_springs[i][j] = Spring(0.1 * spring_stiffness, 3 * spring_rest_len, &this->cloth_vertices[i][j], &this->cloth_vertices[i+3][j]);
+            vertical_bend_springs[i][j] = Spring(0.05 * spring_stiffness, 3 * spring_rest_len, &this->cloth_vertices[i][j], &this->cloth_vertices[i+3][j]);
         }
     }
     // v00 v11
@@ -81,8 +81,8 @@ ClothHandler::ClothHandler(glm::vec3 positions[Global::cloth_rows][Global::cloth
     //
     for(int i = 0; i < Global::cloth_rows-1; i++){
         for(int j = 0; j < Global::cloth_cols-1; j++){
-            falling_shear_springs[i][j] = Spring(spring_stiffness/10.0f, spring_rest_len * sqrt(2.0), &this->cloth_vertices[i][j], &this->cloth_vertices[i+1][j+1]);
-            rising_shear_springs[i][j] = Spring(spring_stiffness/10.0f, spring_rest_len * sqrt(2.0), &this->cloth_vertices[i+1][j], &this->cloth_vertices[i][j+1]);
+            falling_shear_springs[i][j] = Spring(0.1 * spring_stiffness, spring_rest_len * sqrt(2.0), &this->cloth_vertices[i][j], &this->cloth_vertices[i+1][j+1]);
+            rising_shear_springs[i][j] = Spring(0.1 * spring_stiffness, spring_rest_len * sqrt(2.0), &this->cloth_vertices[i+1][j], &this->cloth_vertices[i][j+1]);
         }
     }
 }
