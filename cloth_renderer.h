@@ -5,6 +5,7 @@
 #include "cloth_vertex.h"
 #include "shader.h"
 #include "global.h"
+#include <vector>
 
 class ClothRenderer {
 public:
@@ -23,11 +24,14 @@ private:
 
     unsigned int vertexVBO;
     unsigned int vertexVAO;
-    unsigned int vertexEBOs[Global::cloth_rows-1];
+    unsigned int vertexEBO;
+    // unsigned int vertexEBOs[Global::cloth_rows-1];
     unsigned int structuralSpringEBOs[Global::cloth_rows + Global::cloth_cols];
     unsigned int sheerSpringEBOs[2];
 
-    unsigned int rowIndices[Global::cloth_rows-1][Global::cloth_cols*2];
+    unsigned int indices[(Global::cloth_rows-1) * (2*Global::cloth_cols+1)];
+    std::vector<unsigned int> clothIndices;
+    // unsigned int rowIndices[Global::cloth_rows-1][Global::cloth_cols*2];
     unsigned int horizontalStructuralSpringIndices[Global::cloth_rows][Global::cloth_cols];
     unsigned int verticalStructuralSpringIndices[Global::cloth_cols][Global::cloth_rows];
     unsigned int sheerSpringIndices[2][2*(Global::cloth_rows-1)*(Global::cloth_cols-1)];

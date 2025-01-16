@@ -2,6 +2,7 @@
 #include "cloth_handler.h"
 #include "cloth_vertex.h"
 
+#include <algorithm>
 #include <glm/detail/type_mat.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -16,13 +17,30 @@ ClothRenderer::ClothRenderer(){
     // 20 30 21 31 ... 28 38 29 39
     //             ...
     // 80 90 81 91 ... 88 98 89 99
+
+    // Initial approach, with multiple EBOs 
     
-    for(int i = 0; i < Global::cloth_rows-1; i++){ // load indices so we can use triangle strip
-        for(int j = 0; j < Global::cloth_cols; j++){
-            this->rowIndices[i][2*j]   = Global::cloth_cols*i + j;
-            this->rowIndices[i][2*j+1] = Global::cloth_cols*i + j + Global::cloth_cols;
-        }
+    // for(int i = 0; i < Global::cloth_rows-1; i++){ // load indices so we can use triangle strip
+    //     for(int j = 0; j < Global::cloth_cols; j++){
+    //         this->rowIndices[i][2*j]   = Global::cloth_cols*i + j;
+    //         this->rowIndices[i][2*j+1] = Global::cloth_cols*i + j + Global::cloth_cols;
+    //     }
+    // }
+
+    // New approach, GL_PRIMITIVE_RESTART
+
+    for(int i = 0; i < (Global::cloth_rows-1)*(Global::cloth_cols); i++){
+        this->clothIndices.push_back(i);
+        this->clothIndices.push_back(i + Global::cloth_cols);
+        // std::cout << i << " ";
+        // std::cout << i + Global::cloth_cols << " ";
+        if((i+1)%Global::cloth_cols == 0) // std::cout << "0xFFFF" << std::endl;
+            this->clothIndices.push_back(0xFFFF);
     }
+
+    std::copy(clothIndices.begin(), clothIndices.end(), indices);
+
+    // end New approach
 
     // horizontal
     // 0 1 2 ... 7 8 9
@@ -70,7 +88,8 @@ ClothRenderer::ClothRenderer(){
     }
 
     glGenBuffers(1, &this->vertexVBO);
-    glGenBuffers(Global::cloth_rows-1, this->vertexEBOs);
+    // glGenBuffers(Global::cloth_rows-1, this->vertexEBOs);
+    glGenBuffers(1, &this->vertexEBO);
     glGenVertexArrays(1, &this->vertexVAO);
     glBindBuffer(GL_ARRAY_BUFFER, this->vertexVBO);
     glBindVertexArray(this->vertexVAO);
@@ -82,10 +101,19 @@ ClothRenderer::ClothRenderer(){
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
 
-    for(int i = 0; i < Global::cloth_rows-1; i++){
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vertexEBOs[i]);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->rowIndices[i]), this->rowIndices[i], GL_STATIC_DRAW);
-    }
+    // Initial approach, with multiple EBOs 
+    
+    // for(int i = 0; i < Global::cloth_rows-1; i++){
+    //     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vertexEBOs[i]);
+    //     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(this->rowIndices[i]), this->rowIndices[i], GL_STATIC_DRAW);
+    // }
+
+    // New approach, GL_PRIMITIVE_RESTART
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vertexEBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->clothIndices.size() * sizeof(unsigned int), this->indices, GL_STATIC_DRAW);
+
+    // end New approach
 
     glGenBuffers(Global::cloth_rows + Global::cloth_cols, this->structuralSpringEBOs);
 
@@ -113,7 +141,8 @@ ClothRenderer::ClothRenderer(){
 ClothRenderer::~ClothRenderer(){
     glDeleteVertexArrays(1, &this->vertexVAO);
     glDeleteBuffers(1, &this->vertexVBO);
-    glDeleteBuffers(Global::cloth_rows-1, this->vertexEBOs);
+    // glDeleteBuffers(Global::cloth_rows-1, this->vertexEBOs);
+    glDeleteBuffers(1, &this->vertexEBO);
     glDeleteBuffers(Global::cloth_rows + Global::cloth_cols, this->structuralSpringEBOs);
     glDeleteBuffers(2, this->sheerSpringEBOs);
 }
@@ -122,10 +151,22 @@ void ClothRenderer::RenderCloth(ClothHandler& cloth, Shader& shader){
 
     setUpRendering(cloth, shader);
 
-    for(int i = 0; i < Global::cloth_rows-1; i++){
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vertexEBOs[i]);
-        glDrawElements(GL_TRIANGLE_STRIP, 2 * Global::cloth_cols, GL_UNSIGNED_INT, 0);
-    }
+    // can be swapped with multi draw elements (page 191 of the book)
+    // or try a primitive restart (page 198) this one should be easier to pull off
+    
+    // Initial approach, with multiple EBOs 
+    
+    // for(int i = 0; i < Global::cloth_rows-1; i++){
+    //     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vertexEBOs[i]);
+    //     glDrawElements(GL_TRIANGLE_STRIP, 2 * Global::cloth_cols, GL_UNSIGNED_INT, 0);
+    // }
+    
+    // New approach, GL_PRIMITIVE_RESTART
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vertexEBO);
+    glDrawElements(GL_TRIANGLE_STRIP, this->clothIndices.size(), GL_UNSIGNED_INT, 0);
+
+    // end New approach
 
     glBindVertexArray(0);
 
