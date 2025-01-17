@@ -11,8 +11,8 @@ uniform vec3 sphereColor;
 
 void main() {
     // ambient
-    float ambientStrength = 0.3;
-    vec3 ambient = ambientStrength * lightColor;
+    // float ambientStrength = 0.0;
+    // vec3 ambient = ambientStrength * lightColor;
 
     // diffuse
     vec3 norm = normalize(vNormal);
@@ -21,13 +21,14 @@ void main() {
     vec3 diffuse = diff * lightColor;
 
     // specular
-    float specularStrength = 0.3;
+    float specularStrength = 0.5;
     vec3 viewDir = normalize(viewPos - vFragPos);
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
     vec3 specular = specularStrength * spec * lightColor;
 
-    vec3 result = (ambient + diffuse + specular) * sphereColor;
+    // vec3 result = (ambient + diffuse + specular) * sphereColor;
+    vec3 result = (diffuse + specular) * sphereColor;
 
     FragColor = vec4(result, 1.0);
 }

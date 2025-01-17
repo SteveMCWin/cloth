@@ -249,17 +249,12 @@ void ClothRenderer::fillVertBuffer(ClothHandler& cloth){
 
 void ClothRenderer::setUpRendering(ClothHandler& cloth, Shader& shader){
 
-    fillVertBuffer(cloth);  // note: very wastefull atm if rendering cloth and springs and points at the same time
+    fillVertBuffer(cloth);
 
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, cloth.cloth_position);
-    // glm::mat4 view = glm::mat4(1.0f);
-    // glm::mat4 projection = glm::mat4(1.0f);
-
-    // view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));  // the view matrix will have to be initialized in main if I want camera movement 
 
     shader.use();
-    // shader.setMat4("view", view);
     shader.setMat4("model", model);
 
     glBindVertexArray(this->vertexVAO);
@@ -278,45 +273,3 @@ glm::vec3 ClothRenderer::CalculateVertexNormal(ClothHandler& cloth, int i, int j
     return glm::normalize(glm::cross(v1, v2));
 }
 
-// glm::vec3 ClothRenderer::CalculateVertexNormal(ClothHandler& cloth, int i, int j){
-//     
-//     glm::vec3 v1;
-//     glm::vec3 v2;
-//
-//     glm::vec3 norm = glm::vec3(0.0f);
-//     int div_counter = 0;
-//
-//     if(i-1 >= 0){
-//         if(j-1 >=0){
-//             v1 = cloth.cloth_vertices[i-1][j].position - cloth.cloth_vertices[i][j].position;
-//             v2 = cloth.cloth_vertices[i][j-1].position - cloth.cloth_vertices[i][j].position;
-//             norm += glm::normalize(glm::cross(v1, v2));
-//             div_counter++;
-//         }
-//         if(j+1 < Global::cloth_cols){
-//             v1 = cloth.cloth_vertices[i-1][j].position - cloth.cloth_vertices[i][j].position;
-//             v2 = cloth.cloth_vertices[i][j+1].position - cloth.cloth_vertices[i][j].position;
-//             norm += glm::normalize(glm::cross(v1, v2));
-//             div_counter++;
-//         }
-//     }
-//     if(i+1 < Global::cloth_rows){
-//         if(j-1 >=0){
-//             v1 = cloth.cloth_vertices[i+1][j].position - cloth.cloth_vertices[i][j].position;
-//             v2 = cloth.cloth_vertices[i][j-1].position - cloth.cloth_vertices[i][j].position;
-//             norm += glm::normalize(glm::cross(v1, v2));
-//             div_counter++;
-//         }
-//         if(j+1 < Global::cloth_cols){
-//             v1 = cloth.cloth_vertices[i+1][j].position - cloth.cloth_vertices[i][j].position;
-//             v2 = cloth.cloth_vertices[i][j+1].position - cloth.cloth_vertices[i][j].position;
-//             norm += glm::normalize(glm::cross(v1, v2));
-//             div_counter++;
-//         }
-//     }
-//
-//     if(div_counter)
-//         norm = norm/static_cast<float>(div_counter);
-//
-//     return norm;
-// }

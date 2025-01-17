@@ -11,7 +11,6 @@ ClothVertex::ClothVertex(){
     this->force_applied = glm::vec3(0.0f);
     this->normal = glm::vec3(0.0f);
 
-    // this->force_applied = glm::vec3(0.0f, 0.0f, 0.0f);  // change force applied to be 0x -gy 0z when you get global class up and going
     this->mass = 0.005f;
 
 }

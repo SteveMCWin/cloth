@@ -57,7 +57,7 @@ int main(int, char**){
     glfwSetCursorPosCallback(window, mouse_callback);
 
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    glfwSwapInterval(0);
+    // glfwSwapInterval(0);
 
     if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
         std::cout << "Failed to initialize GLAD" << std::endl;
