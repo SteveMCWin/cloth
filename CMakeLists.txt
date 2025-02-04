@@ -9,6 +9,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(OpenGL REQUIRED)
 find_package(Freetype REQUIRED)
+find_package(glfw3 3.4 REQUIRED)
 
 # find_package(glm CONFIG REQUIRED)
 # target_link_libraries(main PRIVATE glm::glm-header-only)

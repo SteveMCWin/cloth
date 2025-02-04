@@ -128,7 +128,7 @@ void standardScene(GLFWwindow* window){
     CollisionHandler collision_handler;
     ClothRenderer *renderer = new ClothRenderer();
 
-    // cloth_handler.PinVertices(glm::vec2((float)(Global::cloth_rows-1), 0.0f), glm::vec2((float)(Global::cloth_rows-1), (float)(Global::cloth_cols-1)));
+    cloth_handler.PinVertices(glm::vec2((float)(Global::cloth_rows-1), 0.0f), glm::vec2((float)(Global::cloth_rows-1), (float)(Global::cloth_cols-1)));
 
     glm::vec3 lightPos = glm::vec3(1.0f, 4.0f, -2.0f);
     glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
